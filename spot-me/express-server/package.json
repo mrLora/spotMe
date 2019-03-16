@@ -1,0 +1,33 @@
+{
+  "name": "express-server",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "11.11.0"
+  },
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js -e css,html,js",
+    "debug": "npx nodemon --inspect-brk server.js",
+    "db:schema:dev": "psql -f db/schema.sql",
+    "db:seed:test": "psql -f db/seed.sql",
+    "db:reset:test": "psql -f db/schema.sql && psql -f db/seed.sql"
+  },
+  "keywords": [],
+  "author": "Jonathan Lora <jonathan.lora.95@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "pg-promise": "^8.6.3"
+  }
+}

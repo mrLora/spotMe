@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+}
+
+#mainContainer {
+  height: 100vh;
+  width: 100vw;
+  background-color: lightslategray;
+  display: flex;
+  flex-direction: column;
+}
+
+#rowContainer1 {
+  background-color: lightgreen;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#logo {
+  height: 100px;
+  width: 300px;
+  background: lightcoral;
+  margin: 25px 0 0 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#comingSoon {
+  height: 50px;
+  width: 150px;
+  background-color: lightsalmon;
+  margin: 50px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#rowContainer2 {
+  background-color: lightseagreen;
+  flex: 4;
+  display: flex;
+  flex-direction: row;
+}
+
+#interactiveContainer {
+  background-color: lightpink;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.interactiveSlides {
+  height: 50vh;
+  width: 35vw;
+  background-color: whitesmoke;
+}
+
+#initButton {
+  display: block;
+  background-color: black;
+}
+
+#initButton button {
+  margin: 20vh 0 0 13vw;
+}
+
+#pathButtons {
+  display: none;
+  background-color: blueviolet;
+  text-align: center;
+}
+
+#path1 {
+  display: none;
+  background-color: brown;
+  text-align: center;
+}
+
+#path2 {
+  display: none;
+  background-color: darkcyan;
+  text-align: center;
+}
+
+#tagLine {
+  background-color: lightgoldenrodyellow;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+
+
+#rowContainer3 {
+  background-color: lightsteelblue;
+  flex: 0.5;
+}
