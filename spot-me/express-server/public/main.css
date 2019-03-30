@@ -68,6 +68,12 @@
   margin: 20vh 0 0 13vw;
 }
 
+#emailPath {
+  display: none;
+  background-color: brown;
+  text-align: center;
+}
+
 #pathButtons {
   display: none;
   background-color: blueviolet;
