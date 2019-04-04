@@ -30,3 +30,8 @@ app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Sever up and listening on ${PORT}, in ${app.get('env')} mode.`);
 });
+
+app.post('/', (req, res) => {
+  console.log(req.body);
+  res.end('good job!');
+});
