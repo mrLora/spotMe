@@ -3,12 +3,13 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const path = require('path');
 // Setting up PORT
 const PORT = process.env.PORT || 3000;
 // Initializing Express, Morgan, & Body-parser
 const app = express();
 app.use(logger('dev'));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(`${__dirname}/public`)));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Error Handlers for Route and Server
