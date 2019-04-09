@@ -141,6 +141,27 @@ const renderSecondChildren = () => {
 renderSecondChildren();
 
 // Functionality
+// Toggle between first and second slide
+const switchSlides = () => {
+  const firstSlide = document.querySelector('#second').firstChild;
+  const secondSlide = document.querySelector('#second').lastChild;
+  const backButton = document.createElement('button');
+  const borrower = document.querySelector('#second').firstChild.childNodes[1];
+  const lender = document.querySelector('#second').firstChild.lastChild;
+  const blArray = [borrower, lender];
+  blArray.forEach((el) => {
+    el.addEventListener('click', () => {
+      firstSlide.style.display = 'none';
+      secondSlide.style.display = 'flex';
+      secondSlide.appendChild(backButton);
+      backButton.addEventListener('click', () => {
+        secondSlide.style.display = 'none';
+        firstSlide.style.display = 'flex';
+      });
+    });
+  });
+};
+switchSlides();
 
 /* THIRD CONTAINER */
 
