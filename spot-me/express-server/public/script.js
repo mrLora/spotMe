@@ -98,12 +98,18 @@ const renderSecondChildren = () => {
     const divs = el;
     divs.style.width = '30%';
     divs.style.height = '60vh';
+    divs.style.display = 'flex';
+    divs.style.justifyContent = 'center';
+    divs.style.alignItems = 'center';
   });
   secondOneArray[0].style.width = '75%';
   secondOneArray[0].style.height = '10vh';
   secondOneArray[0].style.backgroundColor = 'red';
+  secondOneArray[0].innerText = 'Become a: (Pick One)';
   secondOneArray[1].style.backgroundColor = 'blue';
+  secondOneArray[1].innerText = 'BORROWER';
   secondOneArray[2].style.backgroundColor = 'green';
+  secondOneArray[2].innerText = 'LENDER';
   // SECOND SLIDE
   secondArray[1].style.flex = '1';
   secondArray[1].style.backgroundColor = 'violet';
@@ -114,16 +120,10 @@ const renderSecondChildren = () => {
   // Adding text/question, input field, submit button, and three lines for the results
   const howMuchText = document.createElement('div');
   const numInput = document.createElement('input');
+  const results = document.createElement('p');
   numInput.type = 'number';
   numInput.placeholder = 'Enter amount';
-  const button = document.createElement('button');
-  const oneWeek = document.createElement('p');
-  oneWeek.textContent = 'Week 1:';
-  const twoWeek = document.createElement('p');
-  twoWeek.textContent = 'Week 2:';
-  const oneMonth = document.createElement('p');
-  oneMonth.textContent = 'First Month:';
-  const secondTwoArray = [howMuchText, numInput, button, oneWeek, twoWeek, oneMonth];
+  const secondTwoArray = [howMuchText, numInput, results];
   secondTwoArray.forEach(el => secondArray[1].appendChild(el));
   secondTwoArray.forEach((el) => {
     const divs = el;
@@ -133,14 +133,22 @@ const renderSecondChildren = () => {
   secondTwoArray[0].style.width = '75%';
   secondTwoArray[0].style.height = '15vh';
   secondTwoArray[0].style.backgroundColor = 'orange';
+  secondTwoArray[0].style.display = 'flex';
+  secondTwoArray[0].style.justifyContent = 'center';
+  secondTwoArray[0].style.alignItems = 'center';
   secondTwoArray[1].style.width = '25%';
   secondTwoArray[1].style.height = '5vh';
-  secondTwoArray[2].style.width = '5%';
-  secondTwoArray[2].style.height = '3vh';
 };
 renderSecondChildren();
 
 // Functionality
+// Enter email pop-up
+const 
+// Helper function to remove specified characters from given string
+const filterStr = (filter, str) => {
+  const reg = new RegExp(filter);
+  return str.replace(reg, '').toLowerCase();
+};
 // Toggle between first and second slide
 const switchSlides = () => {
   const firstSlide = document.querySelector('#second').firstChild;
@@ -148,13 +156,20 @@ const switchSlides = () => {
   const backButton = document.createElement('button');
   const borrower = document.querySelector('#second').firstChild.childNodes[1];
   const lender = document.querySelector('#second').firstChild.lastChild;
+  const howMuch = document.querySelector('#second').lastChild.firstChild;
+  const numInput = document.querySelector('#second').lastChild.childNodes[1];
+  const results = document.querySelector('#second').lastChild.childNodes[2];
   const blArray = [borrower, lender];
   blArray.forEach((el) => {
-    el.addEventListener('click', () => {
+    // Populate second slide based on which path was clicked on
+    el.addEventListener('click', (e) => {
       firstSlide.style.display = 'none';
       secondSlide.style.display = 'flex';
+      howMuch.innerText = `How much will you ${filterStr('ER', e.target.innerText)}`;
       secondSlide.appendChild(backButton);
       backButton.addEventListener('click', () => {
+        numInput.value = '';
+        results.innerText = '';
         secondSlide.style.display = 'none';
         firstSlide.style.display = 'flex';
       });
@@ -162,6 +177,36 @@ const switchSlides = () => {
   });
 };
 switchSlides();
+// Helper function to output numbers that include a comma and the correct float value
+const filterNum = num => num.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+// Apply necessary calculations based on which path was chosen
+const applyCalc = () => {
+  const secondSlide = document.querySelector('#second').lastChild;
+  const howMuch = document.querySelector('#second').lastChild.firstChild;
+  const numInput = document.querySelector('#second').lastChild.childNodes[1];
+  const results = document.querySelector('#second').lastChild.childNodes[2];
+  numInput.addEventListener('input', () => {
+    // eslint-disable-next-line default-case
+    switch (filterStr('How much will you ', howMuch.innerText)) {
+      case 'borrow':
+        results.innerText = `Repayment time from options
+          1 Week = ${filterNum(numInput.value * 1.00)}
+          2 Weeks = ${filterNum(numInput.value * 2.50)}
+          1 Month = ${filterNum(numInput.value * 6.00)}`;
+        secondSlide.appendChild(results);
+        break;
+      case 'lend':
+        results.innerText = `Repayment time from options
+          1 Week = ${filterNum(numInput.value * 0.75)}
+          2 Weeks = ${filterNum(numInput.value * 1.80)}
+          1 Month = ${filterNum(numInput.value * 4.50)}`;
+        secondSlide.appendChild(results);
+        break;
+      // No Default
+    }
+  });
+};
+applyCalc();
 
 /* THIRD CONTAINER */
 
