@@ -89,27 +89,38 @@ const renderSecondChildren = () => {
   secondArray[0].style.justifyContent = 'space-evenly';
   secondArray[0].style.flexWrap = 'wrap';
   // Adding text and two clickable divs/buttons
+  const modal = document.createElement('div');
   const becomeText = document.createElement('div');
   const borrower = document.createElement('div');
   const lender = document.createElement('div');
-  const secondOneArray = [becomeText, borrower, lender];
+  const secondOneArray = [modal, becomeText, borrower, lender];
   secondOneArray.forEach(el => secondArray[0].appendChild(el));
   secondOneArray.forEach((el) => {
     const divs = el;
     divs.style.width = '30%';
     divs.style.height = '60vh';
     divs.style.display = 'flex';
+    divs.style.flexDirection = 'column';
     divs.style.justifyContent = 'center';
     divs.style.alignItems = 'center';
   });
-  secondOneArray[0].style.width = '75%';
-  secondOneArray[0].style.height = '10vh';
-  secondOneArray[0].style.backgroundColor = 'red';
-  secondOneArray[0].innerText = 'Become a: (Pick One)';
-  secondOneArray[1].style.backgroundColor = 'blue';
-  secondOneArray[1].innerText = 'BORROWER';
-  secondOneArray[2].style.backgroundColor = 'green';
-  secondOneArray[2].innerText = 'LENDER';
+  // Modal
+  secondOneArray[0].style.width = '100vw';
+  secondOneArray[0].style.height = '80vh';
+  secondOneArray[0].style.zIndex = '5';
+  secondOneArray[0].style.backgroundColor = 'grey';
+  secondOneArray[0].style.display = 'none';
+  // Become text
+  secondOneArray[1].style.width = '75%';
+  secondOneArray[1].style.height = '10vh';
+  secondOneArray[1].style.backgroundColor = 'red';
+  secondOneArray[1].innerText = 'Become a: (Pick One)';
+  // Borrower div
+  secondOneArray[2].style.backgroundColor = 'blue';
+  secondOneArray[2].innerText = 'BORROWER';
+  // Lender div
+  secondOneArray[3].style.backgroundColor = 'green';
+  secondOneArray[3].innerText = 'LENDER';
   // SECOND SLIDE
   secondArray[1].style.flex = '1';
   secondArray[1].style.backgroundColor = 'violet';
@@ -130,12 +141,14 @@ const renderSecondChildren = () => {
     divs.style.width = '25%';
     divs.style.height = '10vh';
   });
+  // How much text
   secondTwoArray[0].style.width = '75%';
   secondTwoArray[0].style.height = '15vh';
   secondTwoArray[0].style.backgroundColor = 'orange';
   secondTwoArray[0].style.display = 'flex';
   secondTwoArray[0].style.justifyContent = 'center';
   secondTwoArray[0].style.alignItems = 'center';
+  // Number Input
   secondTwoArray[1].style.width = '25%';
   secondTwoArray[1].style.height = '5vh';
 };
@@ -143,7 +156,34 @@ renderSecondChildren();
 
 // Functionality
 // Enter email pop-up
-const 
+const triggerModal = () => {
+  const modal = document.querySelector('#second').firstChild.firstChild;
+  const borrower = document.querySelector('#second').firstChild.childNodes[2];
+  const lender = document.querySelector('#second').firstChild.childNodes[3];
+  const blArray = [borrower, lender];
+  blArray.forEach((el) => {
+    el.addEventListener('mouseover', () => {
+      setTimeout(() => {
+        modal.style.display = 'flex';
+        const text = document.createElement('h1');
+        text.innerText = 'Please Enter Your Email';
+        const form = document.createElement('form');
+        form.action = '/';
+        form.method = 'POST';
+        const emailInput = document.createElement('input');
+        emailInput.type = 'email';
+        emailInput.placeholder = 'Enter your email';
+        const submit = document.createElement('button');
+        form.appendChild(emailInput);
+        form.appendChild(submit);
+        modal.appendChild(text);
+        modal.appendChild(form);
+      }, 1000);
+    });
+  });
+};
+triggerModal();
+// setInterval(triggerModal, 2000);
 // Helper function to remove specified characters from given string
 const filterStr = (filter, str) => {
   const reg = new RegExp(filter);
@@ -154,27 +194,27 @@ const switchSlides = () => {
   const firstSlide = document.querySelector('#second').firstChild;
   const secondSlide = document.querySelector('#second').lastChild;
   const backButton = document.createElement('button');
-  const borrower = document.querySelector('#second').firstChild.childNodes[1];
-  const lender = document.querySelector('#second').firstChild.lastChild;
+  const borrower = document.querySelector('#second').firstChild.childNodes[2];
+  const lender = document.querySelector('#second').firstChild.childNodes[3];
   const howMuch = document.querySelector('#second').lastChild.firstChild;
   const numInput = document.querySelector('#second').lastChild.childNodes[1];
   const results = document.querySelector('#second').lastChild.childNodes[2];
   const blArray = [borrower, lender];
-  blArray.forEach((el) => {
-    // Populate second slide based on which path was clicked on
-    el.addEventListener('click', (e) => {
-      firstSlide.style.display = 'none';
-      secondSlide.style.display = 'flex';
-      howMuch.innerText = `How much will you ${filterStr('ER', e.target.innerText)}`;
-      secondSlide.appendChild(backButton);
-      backButton.addEventListener('click', () => {
-        numInput.value = '';
-        results.innerText = '';
-        secondSlide.style.display = 'none';
-        firstSlide.style.display = 'flex';
-      });
-    });
-  });
+  // blArray.forEach((el) => {
+  //   // Populate second slide based on which path was clicked on
+  //   el.addEventListener('click', (e) => {
+  //     firstSlide.style.display = 'none';
+  //     secondSlide.style.display = 'flex';
+  //     howMuch.innerText = `How much will you ${filterStr('ER', e.target.innerText)}`;
+  //     secondSlide.appendChild(backButton);
+  //     backButton.addEventListener('click', () => {
+  //       numInput.value = '';
+  //       results.innerText = '';
+  //       secondSlide.style.display = 'none';
+  //       firstSlide.style.display = 'flex';
+  //     });
+  //   });
+  // });
 };
 switchSlides();
 // Helper function to output numbers that include a comma and the correct float value
