@@ -1,3 +1,4 @@
+const saveEmail = require('../services/api');
 // const body = document.querySelector('body');
 // body.style.display = 'flex';
 // body.style.flexDirection = 'column';
@@ -93,6 +94,19 @@ const renderSecondChildren = () => {
   const becomeText = document.createElement('div');
   const borrower = document.createElement('div');
   const lender = document.createElement('div');
+  const modalText = document.createElement('h1');
+  modalText.innerText = 'Please Enter Your Email';
+  const form = document.createElement('form');
+  form.action = '/';
+  form.method = 'POST';
+  const emailInput = document.createElement('input');
+  emailInput.type = 'email';
+  emailInput.placeholder = 'Enter your email';
+  const submit = document.createElement('button');
+  form.appendChild(emailInput);
+  form.appendChild(submit);
+  modal.appendChild(modalText);
+  modal.appendChild(form);
   const secondOneArray = [modal, becomeText, borrower, lender];
   secondOneArray.forEach(el => secondArray[0].appendChild(el));
   secondOneArray.forEach((el) => {
@@ -165,25 +179,26 @@ const triggerModal = () => {
     el.addEventListener('mouseover', () => {
       setTimeout(() => {
         modal.style.display = 'flex';
-        const text = document.createElement('h1');
-        text.innerText = 'Please Enter Your Email';
-        const form = document.createElement('form');
-        form.action = '/';
-        form.method = 'POST';
-        const emailInput = document.createElement('input');
-        emailInput.type = 'email';
-        emailInput.placeholder = 'Enter your email';
-        const submit = document.createElement('button');
-        form.appendChild(emailInput);
-        form.appendChild(submit);
-        modal.appendChild(text);
-        modal.appendChild(form);
       }, 1000);
     });
   });
 };
 triggerModal();
-// setInterval(triggerModal, 2000);
+// Helper function to asure user is entering an email
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+// Send POST request to express server with inputted email
+const save = () => {
+  const form = document.querySelector('#second').firstChild.firstChild.lastChild;
+  const email = document.querySelector('#second').firstChild.firstChild.lastChild.firstChild;
+  validateEmail(email);
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    saveEmail(email.value);
+  });
+};
+save();
 // Helper function to remove specified characters from given string
 const filterStr = (filter, str) => {
   const reg = new RegExp(filter);

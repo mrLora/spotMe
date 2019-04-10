@@ -1,16 +1,14 @@
-const url = 'http://localhost:3001';
+const axios = require('axios');
 
-const saveEmail = (email) => {
-  const opts = {
-    method: 'POST',
-    body: {
+const saveEmail = async (email) => {
+  try {
+    const res = await axios.post('/', {
       email,
-    },
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  fetch(url, opts);
+    });
+    return console.log(res);
+  } catch (err) {
+    throw (err);
+  }
 };
 
-// module.exports = saveEmail;
+module.exports = saveEmail;
