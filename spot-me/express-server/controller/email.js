@@ -1,27 +1,30 @@
-// EMAILS CONTROLLER
-const db = require('../model/email');
-// Grab ALL emails from DB
-const getAll = async (req, res, next) => {
+/* EMAIL CONTROLLER */
+require('dotenv').config();
+const axios = require('axios');
+
+const DC = process.env.DATA_CENTER;
+const ID = process.env.LIST_ID;
+const TOKEN = process.env.POSTMAN_TOKEN;
+const KEY = process.env.API_KEY;
+
+const saveToMailChimp = async (email) => {
   try {
-    const emails = await db.findAll();
-    res.locals.data = emails;
-    next();
+    const url = `https://${DC}.api.mailchimp.com/3.0/lists/${ID}/members`;
+    const body = {
+      email_address: email,
+      status: 'subscribed',
+    };
+    const headers = {
+      'Postman-Token': TOKEN,
+      'cache-control': 'no-cache',
+      Authorization: `Basic ${KEY}`,
+      'Content-Type': 'application/json',
+    };
+    const res = await axios.post(url, body, { headers });
+    return console.log(res);
   } catch (err) {
-    next(err);
+    throw (err);
   }
 };
-// Save email to DB
-const create = async (req, res, next) => {
-  const { email } = req.body;
-  try {
-    const newEmail = await db.saveEmail({ email });
-    res.locals.data = newEmail;
-    next();
-  } catch (err) {
-    next(err);
-  }
-};
-module.exports = {
-  getAll,
-  create,
-};
+
+module.exports = saveToMailChimp;
