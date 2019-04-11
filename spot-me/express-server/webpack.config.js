@@ -7,4 +7,4 @@ const wpConfig = {
   watch: true,
 };
 
-export default wpConfig;
+module.exports = wpConfig;

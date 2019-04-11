@@ -2,6 +2,19 @@ const saveEmail = require('../services/api');
 // const body = document.querySelector('body');
 // body.style.display = 'flex';
 // body.style.flexDirection = 'column';
+/* DIVIDERS */
+
+// Rendering AND Styling
+const renderDividers = () => {
+  const divider = document.querySelectorAll('.divider');
+  divider.forEach((el) => {
+    const div = el;
+    div.style.width = '100vw';
+    div.style.height = '10vh';
+    div.style.backgroundColor = 'white';
+  });
+};
+renderDividers();
 
 /* FIRST CONTAINER */
 
@@ -10,31 +23,56 @@ const renderFirst = () => {
   const first = document.querySelector('#first');
   first.style.width = '100vw';
   first.style.height = '40vh';
+  first.style.backgroundColor = 'blue';
   first.style.display = 'flex';
   first.style.flexDirection = 'row';
-  first.style.justifyContent = 'space-around';
+  first.style.justifyContent = 'space-evenly';
 };
 renderFirst();
 // Adding divs for the logo, slogan, and an about-me
 const renderFirstChildren = () => {
   const first = document.querySelector('#first');
   const logo = document.createElement('div');
+  const img = document.createElement('img');
+  img.src = './images/logo.png';
+  logo.appendChild(img);
   const slogan = document.createElement('div');
   const firstArray = [logo, slogan];
   firstArray.forEach(el => first.appendChild(el));
-  // logoDiv.style.backgroundImage = 'url(./images/logo.png)';
   // Giving all divs in First Container a width and a height
   firstArray.forEach((el) => {
     const divs = el;
     divs.style.width = '30%';
     divs.style.height = '40vh';
+    divs.style.display = 'flex';
+    divs.style.justifyContent = 'center';
+    divs.style.alignItems = 'center';
   });
   firstArray[0].style.backgroundColor = 'lightcoral';
+  // firstArray[0].style.backgroundImage = 'url(./images/logo.png)';
+  // firstArray[0].style.backgroundRepeat = 'no-repeat';
+  // firstArray[0].style.backgroundSize = '50% 50%';
   firstArray[1].style.backgroundColor = 'lightslategray';
+  firstArray[1].innerText = `Get Money When Needed
+                                      OR
+                             Earn Money by Lending`;
 };
 renderFirstChildren();
 
 // Functionality
+// Used to only fire a function once
+const once = (fn, context) => {
+  let result;
+  return function execute() {
+    if (fn) {
+      // eslint-disable-next-line prefer-rest-params
+      result = fn.apply(context || this, arguments);
+      // eslint-disable-next-line no-param-reassign
+      fn = null;
+    }
+    return result;
+  };
+};
 // Allows events to be chained to one element
 EventTarget.prototype.addEventListener = (() => {
   const { addEventListener } = EventTarget.prototype;
@@ -53,6 +91,7 @@ const toggle = () => {
   // Toggle slogan/about text
   slogan.addEventListener('mouseenter', () => {
     slogan.style.backgroundColor = 'blue';
+    slogan.innerText = 'About me';
     slogan.appendChild(button);
     // Seamless scroll to interactive slides
     button.addEventListener('click', () => {
@@ -60,12 +99,17 @@ const toggle = () => {
     });
   }).addEventListener('mouseleave', () => {
     slogan.style.backgroundColor = 'lightslategray';
+    slogan.innerText = `Get Money When Needed
+                                OR
+                        Earn Money by Lending`;
     slogan.removeChild(button);
   });
 };
 toggle();
 
 /* SECOND CONTAINER */
+
+// Rendering AND Styling
 const renderSecond = () => {
   const second = document.querySelector('#second');
   second.style.backgroundcolor = 'black';
@@ -169,36 +213,6 @@ const renderSecondChildren = () => {
 renderSecondChildren();
 
 // Functionality
-// Enter email pop-up
-const triggerModal = () => {
-  const modal = document.querySelector('#second').firstChild.firstChild;
-  const borrower = document.querySelector('#second').firstChild.childNodes[2];
-  const lender = document.querySelector('#second').firstChild.childNodes[3];
-  const blArray = [borrower, lender];
-  blArray.forEach((el) => {
-    el.addEventListener('mouseover', () => {
-      setTimeout(() => {
-        modal.style.display = 'flex';
-      }, 1000);
-    });
-  });
-};
-triggerModal();
-// Helper function to asure user is entering an email
-function validateEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-// Send POST request to express server with inputted email
-const save = () => {
-  const form = document.querySelector('#second').firstChild.firstChild.lastChild;
-  const email = document.querySelector('#second').firstChild.firstChild.lastChild.firstChild;
-  validateEmail(email);
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    saveEmail(email.value);
-  });
-};
-save();
 // Helper function to remove specified characters from given string
 const filterStr = (filter, str) => {
   const reg = new RegExp(filter);
@@ -215,23 +229,65 @@ const switchSlides = () => {
   const numInput = document.querySelector('#second').lastChild.childNodes[1];
   const results = document.querySelector('#second').lastChild.childNodes[2];
   const blArray = [borrower, lender];
-  // blArray.forEach((el) => {
-  //   // Populate second slide based on which path was clicked on
-  //   el.addEventListener('click', (e) => {
-  //     firstSlide.style.display = 'none';
-  //     secondSlide.style.display = 'flex';
-  //     howMuch.innerText = `How much will you ${filterStr('ER', e.target.innerText)}`;
-  //     secondSlide.appendChild(backButton);
-  //     backButton.addEventListener('click', () => {
-  //       numInput.value = '';
-  //       results.innerText = '';
-  //       secondSlide.style.display = 'none';
-  //       firstSlide.style.display = 'flex';
-  //     });
-  //   });
-  // });
+  blArray.forEach((el) => {
+    // Populate second slide based on which path was clicked on
+    el.addEventListener('click', (e) => {
+      firstSlide.style.display = 'none';
+      secondSlide.style.display = 'flex';
+      howMuch.innerText = `How much will you ${filterStr('ER', e.target.innerText)}`;
+      secondSlide.appendChild(backButton);
+      backButton.addEventListener('click', () => {
+        numInput.value = '';
+        results.innerText = '';
+        secondSlide.style.display = 'none';
+        firstSlide.style.display = 'flex';
+      });
+    });
+  });
 };
-switchSlides();
+// Enter email pop-up
+const triggerModal = () => {
+  const modal = document.querySelector('#second').firstChild.firstChild;
+  const text = document.querySelector('#second').firstChild.childNodes[1];
+  const borrower = document.querySelector('#second').firstChild.childNodes[2];
+  const lender = document.querySelector('#second').firstChild.childNodes[3];
+  const blArray = [text, borrower, lender];
+  const ref = () => {
+    setTimeout(() => {
+      blArray.forEach((el) => {
+        const div = el;
+        div.style.display = 'none';
+      });
+      modal.style.display = 'flex';
+    }, 1000);
+  };
+  blArray.forEach((el) => {
+    if (modal.style.display === 'none') {
+      el.addEventListener('mouseover', ref, true);
+    } else {
+      el.removeEventListener('mouseover', ref, true);
+    }
+  });
+};
+triggerModal();
+// Helper function to asure user is entering an email
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+// Send POST request to express server with inputted email
+const save = () => {
+  const modal = document.querySelector('#second').firstChild.firstChild;
+  const form = document.querySelector('#second').firstChild.firstChild.lastChild;
+  const email = document.querySelector('#second').firstChild.firstChild.lastChild.firstChild;
+  validateEmail(email);
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    saveEmail(email.value);
+    modal.style.display = 'none';
+    switchSlides();
+  });
+};
+save();
 // Helper function to output numbers that include a comma and the correct float value
 const filterNum = num => num.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 // Apply necessary calculations based on which path was chosen
@@ -265,6 +321,7 @@ applyCalc();
 
 /* THIRD CONTAINER */
 
+// Rendering AND Styling
 const third = document.querySelector('#third');
 third.style.width = '100vw';
 third.style.height = '50vh';
