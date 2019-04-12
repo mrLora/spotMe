@@ -19,6 +19,7 @@ const renderSection = () => {
   const title = document.createElement('h1');
   title.className = 'title';
   title.textContent = 'Coming soon...';
+  title.classList.add('animated', 'fadeInLeft', 'slow');
   container.appendChild(title);
   body.appendChild(container);
   section.appendChild(body);
@@ -104,7 +105,9 @@ const toggle = () => {
     temporibus beatae? Ut quasi aliquid rem totam 
     eaque, ex, ducimus quibusdam dolore modi porro 
     alias expedita cum dolorum molestiae corrupti.`;
+    slogan.classList.add('animated', 'fadeIn', 'slow');
     slogan.appendChild(button);
+    button.classList.add('animated', 'infinite', 'zoomIn', 'slower');
     // Seamless scroll to interactive slides
     button.addEventListener('click', () => {
       console.log('click');
@@ -178,15 +181,21 @@ const renderSecondChildren = () => {
   secondArray[0].style.flexWrap = 'wrap';
   // Adding text and two clickable divs/buttons
   const become = document.createElement('div');
-  become.className = 'block';
+  become.className = 'block has-icons-left';
   const becomeText = document.createElement('h1');
   becomeText.textContent = 'Become A:';
   becomeText.className = 'title';
+  const lock = document.createElement('span');
+  lock.className = 'icon is-small is-left';
+  const symbol = document.createElement('i');
+  symbol.className = 'fas fa-lock fa-lg';
+  lock.appendChild(symbol);
+  become.appendChild(lock);
   become.appendChild(becomeText);
   const borrower = document.createElement('div');
-  borrower.className = 'button is-success is-outlined';
+  borrower.className = 'button is-success';
   const lender = document.createElement('div');
-  lender.className = 'button is-danger is-outlined';
+  lender.className = 'button is-danger';
   const modal = document.createElement('div');
   modal.className = 'block';
   modal.appendChild(renderModal());
@@ -195,7 +204,7 @@ const renderSecondChildren = () => {
   secondOneArray.forEach((el) => {
     const divs = el;
     divs.style.width = '30%';
-    divs.style.height = '50vh';
+    divs.style.height = '45vh';
     divs.style.display = 'flex';
     divs.style.flexDirection = 'column';
     divs.style.justifyContent = 'center';
@@ -275,6 +284,15 @@ const renderSecondChildren = () => {
 renderSecondChildren();
 
 // Functionality
+// Check to see if icon is locked or unlocked
+const check = () => {
+  const lock = document.querySelector('#second').firstChild.childNodes[1].firstChild.firstChild;
+  let checker;
+  if (lock.classList.contains('fa-lock')) checker = true;
+  else checker = false;
+  return checker;
+};
+setInterval(check, 1000);
 // Helper function to remove specified characters from given string
 const filterStr = (filter, str) => {
   const reg = new RegExp(filter);
@@ -299,19 +317,21 @@ const switchSlides = () => {
   blArray.forEach((el) => {
     // Populate second slide based on which path was clicked on
     el.addEventListener('click', (e) => {
-      firstSlide.style.display = 'none';
-      secondSlide.style.display = 'flex';
-      howMuchText.textContent = `How much will you ${filterStr('ER', e.target.innerText)}`;
-      secondSlide.appendChild(backButton);
-      backButton.addEventListener('click', () => {
-        numInput.value = '';
-        pay.textContent = '';
-        weekOne.textContent = '';
-        weekTwo.textContent = '';
-        month.textContent = '';
-        secondSlide.style.display = 'none';
-        firstSlide.style.display = 'flex';
-      });
+      if (check() !== true) {
+        firstSlide.style.display = 'none';
+        secondSlide.style.display = 'flex';
+        howMuchText.textContent = `How much will you ${filterStr('ER', e.target.innerText)}`;
+        secondSlide.appendChild(backButton);
+        backButton.addEventListener('click', () => {
+          numInput.value = '';
+          pay.textContent = '';
+          weekOne.textContent = '';
+          weekTwo.textContent = '';
+          month.textContent = '';
+          secondSlide.style.display = 'none';
+          firstSlide.style.display = 'flex';
+        });
+      }
     });
   });
 };
@@ -319,28 +339,24 @@ switchSlides();
 // Enter email pop-up
 const triggerModal = () => {
   const modal = document.querySelector('#second').firstChild.firstChild;
-  const text = document.querySelector('#second').firstChild.childNodes[1];
   const borrower = document.querySelector('#second').firstChild.childNodes[2];
   const lender = document.querySelector('#second').firstChild.childNodes[3];
-  const blArray = [text, borrower, lender];
-  const ref = () => {
-    setTimeout(() => {
-      blArray.forEach((el) => {
-        const div = el;
-        div.style.display = 'none';
-      });
+  borrower.addEventListener('mouseover', () => {
+    if (check() !== false) {
       modal.style.display = 'flex';
-    }, 1000);
-  };
-  blArray.forEach((el) => {
-    if (modal.style.display === 'none') {
-      el.addEventListener('mouseover', ref, true);
-    } else {
-      el.removeEventListener('mouseover', ref, true);
+      modal.style.position = 'absolute';
+      modal.classList.add('animated', 'fadeInDown');
+    }
+  });
+  lender.addEventListener('mouseover', () => {
+    if (check() !== false) {
+      modal.style.display = 'flex';
+      modal.style.position = 'absolute';
+      modal.classList.add('animated', 'fadeInDown');
     }
   });
 };
-// triggerModal();
+triggerModal();
 // Helper function to asure user is entering an email
 const validateEmail = email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 // Toggle email validity indicator
@@ -361,21 +377,23 @@ const emailIsValid = () => {
 setInterval(emailIsValid, 500);
 // Send POST request to express server with inputted email
 const save = () => {
+  const lock = document.querySelector('#second').firstChild.childNodes[1].firstChild.firstChild;
   const modal = document.querySelector('#second').firstChild.firstChild;
   const input = modal.firstChild.firstChild.firstChild;
   const button = modal.firstChild.lastChild.firstChild;
   input.addEventListener('keypress', (e) => {
     if (validateEmail(input.value) === true && e.keyCode === 13) {
       saveEmail(input.value);
+      lock.classList.replace('fa-lock', 'fa-unlock');
       modal.style.display = 'none';
-      switchSlides();
     }
   });
   button.addEventListener('click', () => {
     if (validateEmail(input.value) === true) {
       saveEmail(input.value);
+      lock.classList.replace('fa-lock', 'fa-unlock');
       modal.style.display = 'none';
-      switchSlides();
+      lock.classList.add('animated', 'fadeIn', 'slower');
     }
   });
 };
@@ -398,6 +416,10 @@ const applyCalc = () => {
         weekOne.textContent = `1 Week = ${filterNum(input.value * 1.00)}`;
         weekTwo.textContent = `2 Weeks = ${filterNum(input.value * 2.50)}`;
         month.textContent = `1 Month = ${filterNum(input.value * 6.00)}`;
+        pay.classList.add('animated', 'fadeInLeft', 'slow');
+        weekOne.classList.add('animated', 'fadeInLeft', 'slow', 'delay-1s');
+        weekTwo.classList.add('animated', 'fadeInLeft', 'slow', 'delay-2s');
+        month.classList.add('animated', 'fadeInLeft', 'slow', 'delay-3s');
         break;
       case 'lend':
         pay.textContent = 'Repayment time from options';
@@ -518,3 +540,8 @@ const renderInfo = () => {
   third.childNodes[2].childNodes[2].appendChild(shieldInfo);
 };
 renderInfo();
+// Animations
+// const renderAnimations = () => {
+
+// };
+// renderAnimations();
