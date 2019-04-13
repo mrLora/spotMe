@@ -9,18 +9,38 @@ const renderDivider = () => {
   divider.style.height = '10vh';
 };
 renderDivider();
-// Coming Soon
+// Slogan
 const renderSection = () => {
   const section = document.querySelector('section');
+  section.className = 'hero is-small';
   const body = document.createElement('div');
   body.className = 'hero-body';
   const container = document.createElement('div');
   container.className = 'container';
-  const title = document.createElement('h1');
-  title.className = 'title';
-  title.textContent = 'Coming soon...';
-  title.classList.add('animated', 'fadeInLeft', 'slow');
-  container.appendChild(title);
+  container.style.textAlign = 'center';
+  const sloganOne = document.createElement('h1');
+  sloganOne.className = 'title is-1';
+  sloganOne.textContent = 'Get money when needed';
+  sloganOne.style.fontVariant = 'small-caps';
+  sloganOne.style.color = '#7E0032';
+  sloganOne.style.letterSpacing = '0.5vw';
+  sloganOne.classList.add('animated', 'fadeInLeft', 'slow', 'delay-1s');
+  const sloganTwo = document.createElement('h1');
+  sloganTwo.className = 'title is-1';
+  sloganTwo.textContent = 'OR';
+  sloganTwo.style.color = '#7E0032';
+  sloganTwo.style.letterSpacing = '0.25vw';
+  sloganTwo.classList.add('animated', 'fadeInLeft', 'slow', 'delay-2s');
+  const sloganThree = document.createElement('h1');
+  sloganThree.className = 'title is-1';
+  sloganThree.textContent = 'Earn money by lending';
+  sloganThree.style.fontVariant = 'small-caps';
+  sloganThree.style.color = '#7E0032';
+  sloganThree.style.letterSpacing = '0.5vw';
+  sloganThree.classList.add('animated', 'fadeInLeft', 'slow', 'delay-3s');
+  container.appendChild(sloganOne);
+  container.appendChild(sloganTwo);
+  container.appendChild(sloganThree);
   body.appendChild(container);
   section.appendChild(body);
 };
@@ -33,38 +53,38 @@ const renderFirst = () => {
   const first = document.querySelector('#first');
   first.style.display = 'flex';
   first.style.flexDirection = 'row';
-  first.style.justifyContent = 'space-evenly';
+  first.style.justifyContent = 'space-between';
 };
 renderFirst();
-// Adding divs for the logo, slogan, and an about-me
+// Adding divs for the logo, coming soon, and an about-me
 const renderFirstChildren = () => {
   const first = document.querySelector('#first');
   const logo = document.createElement('div');
   const img = document.createElement('img');
   img.src = './images/logo.png';
+  img.style.paddingRight = '10vw';
   logo.appendChild(img);
-  const slogan = document.createElement('div');
-  const sloganText = document.createElement('strong');
-  sloganText.textContent = `Get Money When Needed
-                                    OR
-                            Earn Money By Lending`;
-  slogan.appendChild(sloganText);
-  const firstArray = [logo, slogan];
+  const comingSoon = document.createElement('div');
+  comingSoon.className = 'block';
+  const soonText = document.createElement('h1');
+  soonText.textContent = 'Coming Soon';
+  comingSoon.style.paddingLeft = '10vw';
+  comingSoon.appendChild(soonText);
+  const firstArray = [logo, comingSoon];
   firstArray.forEach(el => first.appendChild(el));
   // Giving all divs in First Container a width and a height
   firstArray.forEach((el) => {
     const divs = el;
     divs.style.width = '25vw';
     divs.style.height = '40vh';
+    divs.className = 'title is-4';
     divs.style.display = 'flex';
     divs.style.flexDirection = 'column';
     divs.style.justifyContent = 'center';
     divs.style.alignItems = 'center';
     divs.style.textAlign = 'center';
   });
-  firstArray[1].innerText = `Get Money When Needed
-                                      OR
-                             Earn Money By Lending`;
+  firstArray[1].innerText = 'Coming Soon...';
 };
 renderFirstChildren();
 
@@ -95,7 +115,7 @@ EventTarget.prototype.addEventListener = (() => {
 })();
 // Show/hide between the slogan and about
 const toggle = () => {
-  const slogan = document.querySelector('#first').lastChild;
+  const slogan = document.querySelector('section').firstChild.firstChild.firstChild;
   const button = document.createElement('i');
   button.className = 'fas fa-sort-down fa-2x';
   // Toggle slogan/about text
@@ -119,7 +139,7 @@ const toggle = () => {
     // slogan.removeChild(button);
   });
 };
-toggle();
+// toggle();
 
 /* SECOND CONTAINER */
 
@@ -173,7 +193,6 @@ const renderSecondChildren = () => {
   const secondArray = [secondOne, secondTwo];
   secondArray.forEach(el => second.appendChild(el));
   // FIRST SLIDE
-  // secondArray[0].style.flex = '1';
   secondArray[0].style.display = 'flex';
   secondArray[0].style.flexDirection = 'row';
   secondArray[0].style.justifyContent = 'center';
@@ -181,12 +200,15 @@ const renderSecondChildren = () => {
   secondArray[0].style.flexWrap = 'wrap';
   // Adding text and two clickable divs/buttons
   const become = document.createElement('div');
+  become.style.marginTop = '10vh';
   become.className = 'block has-icons-left';
   const becomeText = document.createElement('h1');
-  becomeText.textContent = 'Become A:';
-  becomeText.className = 'title';
+  becomeText.textContent = 'Do you want to be a';
+  becomeText.style.fontVariant = 'small-caps';
+  becomeText.className = 'subtitle is-4';
   const lock = document.createElement('span');
   lock.className = 'icon is-small is-left';
+  lock.style.paddingBottom = '5vh';
   const symbol = document.createElement('i');
   symbol.className = 'fas fa-lock fa-lg';
   lock.appendChild(symbol);
@@ -194,17 +216,26 @@ const renderSecondChildren = () => {
   become.appendChild(becomeText);
   const borrower = document.createElement('div');
   borrower.className = 'button is-success';
+  borrower.style.backgroundColor = 'white';
+  borrower.style.borderColor = '#417505';
+  borrower.style.color = '#7E0032';
+  const or = document.createElement('div');
+  or.className = 'block';
+  or.innerText = 'OR';
   const lender = document.createElement('div');
   lender.className = 'button is-danger';
+  lender.style.backgroundColor = 'white';
+  lender.style.borderColor = '#417505';
+  lender.style.color = '#7E0032';
   const modal = document.createElement('div');
   modal.className = 'block';
   modal.appendChild(renderModal());
-  const secondOneArray = [modal, become, borrower, lender];
+  const secondOneArray = [modal, become, borrower, or, lender];
   secondOneArray.forEach(el => secondArray[0].appendChild(el));
   secondOneArray.forEach((el) => {
     const divs = el;
     divs.style.width = '30%';
-    divs.style.height = '45vh';
+    divs.style.height = '20vh';
     divs.style.display = 'flex';
     divs.style.flexDirection = 'column';
     divs.style.justifyContent = 'center';
@@ -214,15 +245,26 @@ const renderSecondChildren = () => {
   secondOneArray[0].style.width = '100vw';
   secondOneArray[0].style.height = '63.15vh';
   secondOneArray[0].style.zIndex = '5';
-  secondOneArray[0].style.backgroundColor = 'rgb(54, 54, 54)';
+  secondOneArray[0].style.backgroundColor = 'rgb(54, 54, 54, 0.8)';
   secondOneArray[0].style.display = 'none';
   // Become text
   secondOneArray[1].style.width = '75vw';
   secondOneArray[1].style.height = '10vh';
   // Borrower div
   secondOneArray[2].innerText = 'BORROWER';
+  secondOneArray[2].style.fontSize = '3vw';
+  secondOneArray[2].style.fontWeight = 'bolder';
+  secondOneArray[2].style.borderWidth = '0.25vw';
+  // OR
+  secondOneArray[3].style.color = '#417505';
+  secondOneArray[3].style.width = '10%';
+  secondOneArray[3].style.fontSize = '4vw';
+  secondOneArray[3].style.fontWeight = 'bolder';
   // Lender div
-  secondOneArray[3].innerText = 'LENDER';
+  secondOneArray[4].innerText = 'LENDER';
+  secondOneArray[4].style.fontSize = '3vw';
+  secondOneArray[4].style.fontWeight = 'bolder';
+  secondOneArray[4].style.borderWidth = '0.25vw';
   // SECOND SLIDE
   secondArray.className = 'block';
   secondArray[1].style.height = '63.15vh';
@@ -306,7 +348,7 @@ const switchSlides = () => {
   backButton.className = 'button is-dark';
   backButton.textContent = 'Back';
   const borrower = document.querySelector('#second').firstChild.childNodes[2];
-  const lender = document.querySelector('#second').firstChild.childNodes[3];
+  const lender = document.querySelector('#second').firstChild.childNodes[4];
   const howMuchText = document.querySelector('#second').lastChild.firstChild.firstChild;
   const numInput = document.querySelector('#second').lastChild.childNodes[1].firstChild.firstChild.firstChild;
   const pay = document.querySelector('#second').lastChild.childNodes[2];
@@ -340,15 +382,15 @@ switchSlides();
 const triggerModal = () => {
   const modal = document.querySelector('#second').firstChild.firstChild;
   const borrower = document.querySelector('#second').firstChild.childNodes[2];
-  const lender = document.querySelector('#second').firstChild.childNodes[3];
-  borrower.addEventListener('mouseover', () => {
+  const lender = document.querySelector('#second').firstChild.childNodes[4];
+  borrower.addEventListener('click', () => {
     if (check() !== false) {
       modal.style.display = 'flex';
       modal.style.position = 'absolute';
       modal.classList.add('animated', 'fadeInDown');
     }
   });
-  lender.addEventListener('mouseover', () => {
+  lender.addEventListener('click', () => {
     if (check() !== false) {
       modal.style.display = 'flex';
       modal.style.position = 'absolute';
@@ -384,16 +426,23 @@ const save = () => {
   input.addEventListener('keypress', (e) => {
     if (validateEmail(input.value) === true && e.keyCode === 13) {
       saveEmail(input.value);
-      lock.classList.replace('fa-lock', 'fa-unlock');
       modal.style.display = 'none';
+      lock.classList.add('animated', 'fadeOut');
+      lock.addEventListener('animationend', () => {
+        lock.classList.replace('fa-lock', 'fa-unlock');
+        lock.classList.replace('fadeOut', 'fadeIn');
+      });
     }
   });
   button.addEventListener('click', () => {
     if (validateEmail(input.value) === true) {
       saveEmail(input.value);
-      lock.classList.replace('fa-lock', 'fa-unlock');
       modal.style.display = 'none';
-      lock.classList.add('animated', 'fadeIn', 'slower');
+      lock.classList.add('animated', 'fadeOut');
+      lock.addEventListener('animationend', () => {
+        lock.classList.replace('fa-lock', 'fa-unlock');
+        lock.classList.replace('fadeOut', 'fadeIn');
+      });
     }
   });
 };
@@ -413,9 +462,9 @@ const applyCalc = () => {
     switch (filterStr('How much will you ', howMuch.innerText)) {
       case 'borrow':
         pay.textContent = 'Repayment time from options';
-        weekOne.textContent = `1 Week = ${filterNum(input.value * 1.00)}`;
-        weekTwo.textContent = `2 Weeks = ${filterNum(input.value * 2.50)}`;
-        month.textContent = `1 Month = ${filterNum(input.value * 6.00)}`;
+        weekOne.textContent = `1 Week = ${filterNum(input.value * 1.01)}`;
+        weekTwo.textContent = `2 Weeks = ${filterNum(input.value * 1.025)}`;
+        month.textContent = `1 Month = ${filterNum(input.value * 1.06)}`;
         pay.classList.add('animated', 'fadeInLeft', 'slow');
         weekOne.classList.add('animated', 'fadeInLeft', 'slow', 'delay-1s');
         weekTwo.classList.add('animated', 'fadeInLeft', 'slow', 'delay-2s');
@@ -426,6 +475,10 @@ const applyCalc = () => {
         weekOne.textContent = `1 Week = ${filterNum(input.value * 0.75)}`;
         weekTwo.textContent = `2 Weeks = ${filterNum(input.value * 1.80)}`;
         month.textContent = `1 Month = ${filterNum(input.value * 4.50)}`;
+        pay.classList.add('animated', 'fadeInLeft', 'slow');
+        weekOne.classList.add('animated', 'fadeInLeft', 'slow', 'delay-1s');
+        weekTwo.classList.add('animated', 'fadeInLeft', 'slow', 'delay-2s');
+        month.classList.add('animated', 'fadeInLeft', 'slow', 'delay-3s');
         break;
       // No Default
     }
