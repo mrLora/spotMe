@@ -1,4 +1,5 @@
 /* EMAIL CONTROLLER */
+
 require('dotenv').config();
 const axios = require('axios');
 

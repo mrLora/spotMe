@@ -1,4 +1,5 @@
 /* EMAIL ROUTE */
+
 const express = require('express');
 const emailController = require('../controller/email');
 // Initializing Express Router

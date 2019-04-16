@@ -1,7 +1,15 @@
 const saveEmail = require('../services/api');
 
-/* DIVIDERS */
+/* DIVIDER */
 
+// Background
+const addBackground = () => {
+  const body = document.querySelector('body');
+  body.style.backgroundImage = "url('./images/white.jpg')";
+  body.style.backgroundSize = 'cover';
+  body.style.backgroundRepeat = 'no-repeat';
+};
+addBackground();
 // Rendering AND Styling
 const renderDivider = () => {
   const divider = document.querySelector('.divider');
@@ -22,20 +30,20 @@ const renderSection = () => {
   sloganOne.className = 'title is-1';
   sloganOne.textContent = 'Get money when needed';
   sloganOne.style.fontVariant = 'small-caps';
-  sloganOne.style.color = '#7E0032';
+  sloganOne.style.color = '#417505';
   sloganOne.style.letterSpacing = '0.5vw';
   sloganOne.classList.add('animated', 'fadeInLeft', 'slow', 'delay-1s');
   const sloganTwo = document.createElement('h1');
   sloganTwo.className = 'title is-1';
   sloganTwo.textContent = 'OR';
-  sloganTwo.style.color = '#7E0032';
+  sloganTwo.style.color = '#417505';
   sloganTwo.style.letterSpacing = '0.25vw';
   sloganTwo.classList.add('animated', 'fadeInLeft', 'slow', 'delay-2s');
   const sloganThree = document.createElement('h1');
   sloganThree.className = 'title is-1';
   sloganThree.textContent = 'Earn money by lending';
   sloganThree.style.fontVariant = 'small-caps';
-  sloganThree.style.color = '#7E0032';
+  sloganThree.style.color = '#417505';
   sloganThree.style.letterSpacing = '0.5vw';
   sloganThree.classList.add('animated', 'fadeInLeft', 'slow', 'delay-3s');
   container.appendChild(sloganOne);
@@ -48,7 +56,7 @@ renderSection();
 
 /* FIRST CONTAINER */
 
-// Rendering AND Styling
+// Rendering & Styling
 const renderFirst = () => {
   const first = document.querySelector('#first');
   first.style.display = 'flex';
@@ -76,7 +84,7 @@ const renderFirstChildren = () => {
   firstArray.forEach((el) => {
     const divs = el;
     divs.style.width = '25vw';
-    divs.style.height = '40vh';
+    divs.style.height = '25vh';
     divs.className = 'title is-4';
     divs.style.display = 'flex';
     divs.style.flexDirection = 'column';
@@ -88,20 +96,8 @@ const renderFirstChildren = () => {
 };
 renderFirstChildren();
 
-// Functionality
-// Used to only fire a function once
-const once = (fn, context) => {
-  let result;
-  return function execute() {
-    if (fn) {
-      // eslint-disable-next-line prefer-rest-params
-      result = fn.apply(context || this, arguments);
-      // eslint-disable-next-line no-param-reassign
-      fn = null;
-    }
-    return result;
-  };
-};
+/* Functionality */
+
 // Allows events to be chained to one element
 EventTarget.prototype.addEventListener = (() => {
   const { addEventListener } = EventTarget.prototype;
@@ -113,33 +109,6 @@ EventTarget.prototype.addEventListener = (() => {
     return this;
   };
 })();
-// Show/hide between the slogan and about
-const toggle = () => {
-  const slogan = document.querySelector('section').firstChild.firstChild.firstChild;
-  const button = document.createElement('i');
-  button.className = 'fas fa-sort-down fa-2x';
-  // Toggle slogan/about text
-  slogan.addEventListener('mouseenter', () => {
-    slogan.innerText = `About Lorem ipsum dolor sit amet 
-    consectetur adipisicing elit. Possimus dolores 
-    temporibus beatae? Ut quasi aliquid rem totam 
-    eaque, ex, ducimus quibusdam dolore modi porro 
-    alias expedita cum dolorum molestiae corrupti.`;
-    slogan.classList.add('animated', 'fadeIn', 'slow');
-    slogan.appendChild(button);
-    button.classList.add('animated', 'infinite', 'zoomIn', 'slower');
-    // Seamless scroll to interactive slides
-    button.addEventListener('click', () => {
-      console.log('click');
-    });
-  }).addEventListener('mouseleave', () => {
-    slogan.innerText = `Get Money When Needed
-                                OR
-                        Earn Money By Lending`;
-    // slogan.removeChild(button);
-  });
-};
-// toggle();
 
 /* SECOND CONTAINER */
 
@@ -159,7 +128,7 @@ const renderModal = () => {
   controlOne.className = 'control has-icons-left has-icons-right';
   const input = document.createElement('input');
   input.type = 'email';
-  input.className = 'input';
+  input.className = 'input is-medium';
   input.placeholder = 'Enter your email';
   const spanOne = document.createElement('span');
   spanOne.className = 'icon is-small is-left';
@@ -170,11 +139,11 @@ const renderModal = () => {
   const iconTwo = document.createElement('i');
   iconTwo.className = 'fas fa-exclamation-triangle';
   const controlTwo = document.createElement('div');
-  controlTwo.className = 'control';
+  controlTwo.className = 'control buttons are-medium';
   const button = document.createElement('button');
   button.type = 'submit';
   button.className = 'button is-success';
-  button.innerText = 'Subscribe';
+  button.innerText = 'Early-Access';
   controlTwo.appendChild(button);
   spanOne.appendChild(iconOne);
   spanTwo.appendChild(iconTwo);
@@ -198,37 +167,58 @@ const renderSecondChildren = () => {
   secondArray[0].style.justifyContent = 'center';
   secondArray[0].style.justifyContent = 'space-evenly';
   secondArray[0].style.flexWrap = 'wrap';
-  // Adding text and two clickable divs/buttons
+  // Adding text and two clickable divs(buttons)
+  // "Do you want to be a" TEXT
   const become = document.createElement('div');
   become.style.marginTop = '10vh';
+  become.style.marginBottom = '10vh';
   become.className = 'block has-icons-left';
   const becomeText = document.createElement('h1');
   becomeText.textContent = 'Do you want to be a';
   becomeText.style.fontVariant = 'small-caps';
   becomeText.className = 'subtitle is-4';
+  // Lock Icon
   const lock = document.createElement('span');
   lock.className = 'icon is-small is-left';
   lock.style.paddingBottom = '5vh';
   const symbol = document.createElement('i');
-  symbol.className = 'fas fa-lock fa-lg';
+  symbol.className = 'fas fa-lock fa-2x';
   lock.appendChild(symbol);
   become.appendChild(lock);
   become.appendChild(becomeText);
+  // BORROWER Div(button) -LEFT
   const borrower = document.createElement('div');
-  borrower.className = 'button is-success';
-  borrower.style.backgroundColor = 'white';
-  borrower.style.borderColor = '#417505';
-  borrower.style.color = '#7E0032';
+  borrower.className = 'button is-dark is-rounded';
+  borrower.style.backgroundColor = '#7E0032';
+  borrower.style.color = 'white';
+  // OR Text
   const or = document.createElement('div');
   or.className = 'block';
   or.innerText = 'OR';
+  or.className = 'title is-1';
+  // LENDER Div(button) -RIGHT
   const lender = document.createElement('div');
-  lender.className = 'button is-danger';
-  lender.style.backgroundColor = 'white';
-  lender.style.borderColor = '#417505';
-  lender.style.color = '#7E0032';
+  lender.className = 'button is-dark is-rounded';
+  lender.style.backgroundColor = '#7E0032';
+  lender.style.color = 'white';
+  // Modal pop-up
   const modal = document.createElement('div');
   modal.className = 'block';
+  // "Get the numbers & early access" TEXT
+  const pitchBox = document.createElement('div');
+  pitchBox.className = 'block';
+  pitchBox.style.paddingTop = '10vh';
+  pitchBox.style.paddingBottom = '10vh';
+  const pitchText = document.createElement('h1');
+  pitchText.textContent = 'Get the numbers & early access!';
+  pitchText.style.borderBottom = '0.3vh solid white';
+  pitchText.style.fontVariant = 'small-caps';
+  pitchText.style.color = 'white';
+  pitchText.style.letterSpacing = '0.5vw';
+  pitchText.className = 'title is-1';
+  pitchText.classList.add('animated', 'fadeInLeft', 'slow');
+  pitchBox.appendChild(pitchText);
+  modal.appendChild(pitchBox);
   modal.appendChild(renderModal());
   const secondOneArray = [modal, become, borrower, or, lender];
   secondOneArray.forEach(el => secondArray[0].appendChild(el));
@@ -243,32 +233,32 @@ const renderSecondChildren = () => {
   });
   // Modal
   secondOneArray[0].style.width = '100vw';
-  secondOneArray[0].style.height = '63.15vh';
+  secondOneArray[0].style.height = '56.25vh';
+  secondOneArray[0].style.marginTop = '7vh';
   secondOneArray[0].style.zIndex = '5';
-  secondOneArray[0].style.backgroundColor = 'rgb(54, 54, 54, 0.8)';
+  secondOneArray[0].style.backgroundColor = 'rgb(54, 54, 54, 0.9)';
   secondOneArray[0].style.display = 'none';
+  secondOneArray[0].style.justifyContent = 'flex-start';
   // Become text
   secondOneArray[1].style.width = '75vw';
   secondOneArray[1].style.height = '10vh';
   // Borrower div
+  secondOneArray[2].style.boxShadow = '0 2px 25px rgba(54, 54, 54, 1)';
   secondOneArray[2].innerText = 'BORROWER';
   secondOneArray[2].style.fontSize = '3vw';
   secondOneArray[2].style.fontWeight = 'bolder';
-  secondOneArray[2].style.borderWidth = '0.25vw';
   // OR
   secondOneArray[3].style.color = '#417505';
-  secondOneArray[3].style.width = '10%';
-  secondOneArray[3].style.fontSize = '4vw';
   secondOneArray[3].style.fontWeight = 'bolder';
   // Lender div
+  secondOneArray[4].style.boxShadow = '0 2px 25px rgba(54, 54, 54, 1)';
   secondOneArray[4].innerText = 'LENDER';
   secondOneArray[4].style.fontSize = '3vw';
   secondOneArray[4].style.fontWeight = 'bolder';
-  secondOneArray[4].style.borderWidth = '0.25vw';
   // SECOND SLIDE
   secondArray.className = 'block';
-  secondArray[1].style.height = '63.15vh';
-  secondArray[1].style.backgroundColor = 'white';
+  secondArray[1].style.height = '56.25vh';
+  secondArray[1].style.backgroundColor = 'transparent';
   secondArray[1].style.display = 'none';
   secondArray[1].style.flexDirection = 'column';
   secondArray[1].style.alignItems = 'center';
@@ -334,36 +324,90 @@ const check = () => {
   else checker = false;
   return checker;
 };
-setInterval(check, 1000);
+setInterval(check, 500);
+// Enter email pop-up
+const triggerModal = () => {
+  const modal = document.querySelector('#second').firstChild.firstChild;
+  const borrower = document.querySelector('#second').firstChild.childNodes[2];
+  const lender = document.querySelector('#second').firstChild.childNodes[4];
+  const blArray = [borrower, lender];
+  blArray.forEach((el) => {
+    el.addEventListener('click', (e) => {
+      if (check() !== false) {
+        modal.style.display = 'flex';
+        modal.style.position = 'absolute';
+        modal.classList.add('animated', 'fadeInDown');
+      }
+      // Create an instance of the button's text
+      this.path = e.target.innerText;
+    });
+  });
+};
+triggerModal();
 // Helper function to remove specified characters from given string
 const filterStr = (filter, str) => {
   const reg = new RegExp(filter);
   return str.replace(reg, '').toLowerCase();
 };
-// Toggle between first and second slide
-const switchSlides = () => {
+// Toggle second slide after submitting email
+const switchSlide = () => {
+  const lock = document.querySelector('#second').firstChild.childNodes[1].firstChild.firstChild;
   const firstSlide = document.querySelector('#second').firstChild;
   const secondSlide = document.querySelector('#second').lastChild;
   const backButton = document.createElement('button');
   backButton.className = 'button is-dark';
   backButton.textContent = 'Back';
-  const borrower = document.querySelector('#second').firstChild.childNodes[2];
-  const lender = document.querySelector('#second').firstChild.childNodes[4];
   const howMuchText = document.querySelector('#second').lastChild.firstChild.firstChild;
   const numInput = document.querySelector('#second').lastChild.childNodes[1].firstChild.firstChild.firstChild;
   const pay = document.querySelector('#second').lastChild.childNodes[2];
   const weekOne = document.querySelector('#second').lastChild.childNodes[3];
   const weekTwo = document.querySelector('#second').lastChild.childNodes[4];
   const month = document.querySelector('#second').lastChild.childNodes[5];
+  lock.addEventListener('animationend', setTimeout(() => {
+    if (check() !== true) {
+      firstSlide.style.display = 'none';
+      secondSlide.style.display = 'flex';
+      howMuchText.textContent = `How much would you like to ${filterStr('ER', this.path)}?`;
+      howMuchText.style.fontVariant = 'small-caps';
+      howMuchText.style.paddingTop = '5vh';
+      howMuchText.style.borderBottom = '0.3vh solid black';
+      secondSlide.appendChild(backButton);
+      backButton.addEventListener('click', () => {
+        numInput.value = '';
+        pay.textContent = '';
+        weekOne.textContent = '';
+        weekTwo.textContent = '';
+        month.textContent = '';
+        secondSlide.style.display = 'none';
+        firstSlide.style.display = 'flex';
+      });
+    }
+  }, 2000));
+};
+// Toggle between first and second slide
+const toggleSlides = () => {
+  const borrower = document.querySelector('#second').firstChild.childNodes[2];
+  const lender = document.querySelector('#second').firstChild.childNodes[4];
   const blArray = [borrower, lender];
-  blArray.forEach((el) => {
-    // Populate second slide based on which path was clicked on
-    el.addEventListener('click', (e) => {
-      if (check() !== true) {
+  const firstSlide = document.querySelector('#second').firstChild;
+  const secondSlide = document.querySelector('#second').lastChild;
+  const backButton = document.querySelector('#second').lastChild.lastChild;
+  const howMuchText = document.querySelector('#second').lastChild.firstChild.firstChild;
+  const numInput = document.querySelector('#second').lastChild.childNodes[1].firstChild.firstChild.firstChild;
+  const pay = document.querySelector('#second').lastChild.childNodes[2];
+  const weekOne = document.querySelector('#second').lastChild.childNodes[3];
+  const weekTwo = document.querySelector('#second').lastChild.childNodes[4];
+  const month = document.querySelector('#second').lastChild.childNodes[5];
+  // Populate second slide based on which path was clicked on
+  if (check() !== true) {
+    blArray.forEach((el) => {
+      el.addEventListener('click', (e) => {
         firstSlide.style.display = 'none';
         secondSlide.style.display = 'flex';
-        howMuchText.textContent = `How much will you ${filterStr('ER', e.target.innerText)}`;
-        secondSlide.appendChild(backButton);
+        howMuchText.textContent = `How much would you like to ${filterStr('ER', e.target.innerText)}?`;
+        howMuchText.style.fontVariant = 'small-caps';
+        howMuchText.style.paddingTop = '5vh';
+        howMuchText.style.borderBottom = '0.3vh solid black';
         backButton.addEventListener('click', () => {
           numInput.value = '';
           pay.textContent = '';
@@ -373,40 +417,19 @@ const switchSlides = () => {
           secondSlide.style.display = 'none';
           firstSlide.style.display = 'flex';
         });
-      }
+      });
     });
-  });
+  }
 };
-switchSlides();
-// Enter email pop-up
-const triggerModal = () => {
-  const modal = document.querySelector('#second').firstChild.firstChild;
-  const borrower = document.querySelector('#second').firstChild.childNodes[2];
-  const lender = document.querySelector('#second').firstChild.childNodes[4];
-  borrower.addEventListener('click', () => {
-    if (check() !== false) {
-      modal.style.display = 'flex';
-      modal.style.position = 'absolute';
-      modal.classList.add('animated', 'fadeInDown');
-    }
-  });
-  lender.addEventListener('click', () => {
-    if (check() !== false) {
-      modal.style.display = 'flex';
-      modal.style.position = 'absolute';
-      modal.classList.add('animated', 'fadeInDown');
-    }
-  });
-};
-triggerModal();
+setInterval(toggleSlides, 1000);
 // Helper function to asure user is entering an email
 const validateEmail = email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 // Toggle email validity indicator
 const emailIsValid = () => {
   const modal = document.querySelector('#second').firstChild.firstChild;
-  const input = modal.firstChild.firstChild.firstChild;
-  const icon = modal.firstChild.firstChild.lastChild.firstChild;
-  const button = modal.firstChild.lastChild.firstChild;
+  const input = modal.lastChild.firstChild.firstChild;
+  const icon = modal.lastChild.firstChild.lastChild.firstChild;
+  const button = modal.lastChild.lastChild.firstChild;
   if (validateEmail(input.value) === true) {
     icon.classList.remove('fa-exclamation-triangle');
     icon.className = 'fas fa-check';
@@ -421,8 +444,8 @@ setInterval(emailIsValid, 500);
 const save = () => {
   const lock = document.querySelector('#second').firstChild.childNodes[1].firstChild.firstChild;
   const modal = document.querySelector('#second').firstChild.firstChild;
-  const input = modal.firstChild.firstChild.firstChild;
-  const button = modal.firstChild.lastChild.firstChild;
+  const input = modal.lastChild.firstChild.firstChild;
+  const button = modal.lastChild.lastChild.firstChild;
   input.addEventListener('keypress', (e) => {
     if (validateEmail(input.value) === true && e.keyCode === 13) {
       saveEmail(input.value);
@@ -432,6 +455,7 @@ const save = () => {
         lock.classList.replace('fa-lock', 'fa-unlock');
         lock.classList.replace('fadeOut', 'fadeIn');
       });
+      switchSlide();
     }
   });
   button.addEventListener('click', () => {
@@ -443,6 +467,7 @@ const save = () => {
         lock.classList.replace('fa-lock', 'fa-unlock');
         lock.classList.replace('fadeOut', 'fadeIn');
       });
+      switchSlide();
     }
   });
 };
@@ -454,31 +479,44 @@ const applyCalc = () => {
   const howMuch = document.querySelector('#second').lastChild.firstChild;
   const input = document.querySelector('#second').lastChild.childNodes[1].firstChild.firstChild.firstChild;
   const pay = document.querySelector('#second').lastChild.childNodes[2];
+  pay.style.width = '40%';
   const weekOne = document.querySelector('#second').lastChild.childNodes[3];
   const weekTwo = document.querySelector('#second').lastChild.childNodes[4];
   const month = document.querySelector('#second').lastChild.childNodes[5];
-  input.addEventListener('input', () => {
+  input.addEventListener('input', (e) => {
     // eslint-disable-next-line default-case
-    switch (filterStr('How much will you ', howMuch.innerText)) {
-      case 'borrow':
-        pay.textContent = 'Repayment time from options';
-        weekOne.textContent = `1 Week = ${filterNum(input.value * 1.01)}`;
-        weekTwo.textContent = `2 Weeks = ${filterNum(input.value * 1.025)}`;
-        month.textContent = `1 Month = ${filterNum(input.value * 1.06)}`;
-        pay.classList.add('animated', 'fadeInLeft', 'slow');
-        weekOne.classList.add('animated', 'fadeInLeft', 'slow', 'delay-1s');
-        weekTwo.classList.add('animated', 'fadeInLeft', 'slow', 'delay-2s');
-        month.classList.add('animated', 'fadeInLeft', 'slow', 'delay-3s');
+    switch (filterStr('How much would you like to ', howMuch.innerText)) {
+      case 'borrow?':
+        if (e.value !== '') {
+          pay.textContent = 'Repayment timeframe options + interest:';
+          pay.style.paddingLeft = '3vw';
+          weekOne.textContent = `1 Week = ${filterNum(input.value * 1.01)}`;
+          weekOne.style.paddingLeft = '5vw';
+          weekTwo.textContent = `2 Weeks = ${filterNum(input.value * 1.025)}`;
+          weekTwo.style.paddingLeft = '5vw';
+          month.textContent = `1 Month = ${filterNum(input.value * 1.06)}`;
+          month.style.paddingLeft = '5vw';
+          pay.classList.add('animated', 'fadeInLeft', 'slower');
+          weekOne.classList.add('animated', 'fadeInLeft', 'slower', 'delay-1s');
+          weekTwo.classList.add('animated', 'fadeInLeft', 'slower', 'delay-2s');
+          month.classList.add('animated', 'fadeInLeft', 'slower', 'delay-3s');
+        }
         break;
-      case 'lend':
-        pay.textContent = 'Repayment time from options';
-        weekOne.textContent = `1 Week = ${filterNum(input.value * 0.75)}`;
-        weekTwo.textContent = `2 Weeks = ${filterNum(input.value * 1.80)}`;
-        month.textContent = `1 Month = ${filterNum(input.value * 4.50)}`;
-        pay.classList.add('animated', 'fadeInLeft', 'slow');
-        weekOne.classList.add('animated', 'fadeInLeft', 'slow', 'delay-1s');
-        weekTwo.classList.add('animated', 'fadeInLeft', 'slow', 'delay-2s');
-        month.classList.add('animated', 'fadeInLeft', 'slow', 'delay-3s');
+      case 'lend?':
+        if (e.value !== '') {
+          pay.textContent = 'Your money back + interest:';
+          pay.style.paddingLeft = '7.5vw';
+          weekOne.textContent = `1 Week = ${filterNum(input.value * 1.007)}`;
+          weekOne.style.paddingLeft = '5vw';
+          weekTwo.textContent = `2 Weeks = ${filterNum(input.value * 1.018)}`;
+          weekTwo.style.paddingLeft = '5vw';
+          month.textContent = `1 Month = ${filterNum(input.value * 1.045)}`;
+          month.style.paddingLeft = '5vw';
+          pay.classList.add('animated', 'fadeInLeft', 'slower');
+          weekOne.classList.add('animated', 'fadeInLeft', 'slower', 'delay-1s');
+          weekTwo.classList.add('animated', 'fadeInLeft', 'slower', 'delay-2s');
+          month.classList.add('animated', 'fadeInLeft', 'slower', 'delay-3s');
+        }
         break;
       // No Default
     }
@@ -492,7 +530,7 @@ applyCalc();
 const renderThird = () => {
   const third = document.querySelector('#third');
   third.style.width = '100vw';
-  third.style.height = '50vh';
+  third.style.height = '40vh';
   third.style.display = 'flex';
   third.style.flexDirection = 'row';
   third.style.justifyContent = 'center';
@@ -512,15 +550,17 @@ const renderThirdChildren = () => {
   }
   for (let x = 0; x <= thirdArray.length - 1; x += 1) {
     for (let y = 0; y <= thirdArray.length - 1; y += 1) {
-      thirdArray[x].childNodes[y].style.width = '25%';
-      thirdArray[x].childNodes[y].style.height = '25%';
+      thirdArray[x].childNodes[y].style.width = '5%';
+      thirdArray[x].childNodes[y].style.height = '5%';
       thirdArray[x].childNodes[y].style.display = 'flex';
       thirdArray[x].childNodes[y].style.flexDirection = 'column';
       thirdArray[x].childNodes[y].style.justifyContent = 'center';
       thirdArray[x].childNodes[y].style.alignItems = 'center';
     }
     thirdArray[x].style.width = '33%';
-    thirdArray[x].style.height = '50vh';
+    thirdArray[x].style.height = '25vh';
+    thirdArray[x].style.backgroundColor = 'transparent';
+    thirdArray[x].style.textAlign = 'center';
     thirdArray[x].style.display = 'flex';
     thirdArray[x].style.flexDirection = 'column';
     thirdArray[x].style.justifyContent = 'space-evenly';
@@ -533,13 +573,13 @@ renderThirdChildren();
 const renderIcons = () => {
   const third = document.querySelector('#third');
   const calendar = document.createElement('i');
-  calendar.className = 'far fa-calendar-alt fa-4x';
+  calendar.className = 'far fa-calendar-alt fa-2x';
   third.childNodes[0].firstChild.appendChild(calendar);
   const money = document.createElement('i');
-  money.className = 'fas fa-dollar-sign fa-4x';
+  money.className = 'fas fa-dollar-sign fa-2x';
   third.childNodes[1].firstChild.appendChild(money);
   const shield = document.createElement('i');
-  shield.className = 'fas fa-shield-alt fa-4x';
+  shield.className = 'fas fa-shield-alt fa-2x';
   third.childNodes[2].firstChild.appendChild(shield);
 };
 renderIcons();
@@ -553,15 +593,15 @@ const renderTitles = () => {
   });
   const calendarTitle = document.createElement('h2');
   calendarTitle.textContent = 'Calendar';
-  calendarTitle.className = 'title';
+  calendarTitle.className = 'title is-5';
   third.childNodes[0].childNodes[1].appendChild(calendarTitle);
   const moneyTitle = document.createElement('h2');
-  moneyTitle.textContent = 'Money';
-  moneyTitle.className = 'title';
+  moneyTitle.textContent = 'Earnings';
+  moneyTitle.className = 'title is-5';
   third.childNodes[1].childNodes[1].appendChild(moneyTitle);
   const shieldTitle = document.createElement('h2');
   shieldTitle.textContent = 'Security';
-  shieldTitle.className = 'title';
+  shieldTitle.className = 'title is-5';
   third.childNodes[2].childNodes[1].appendChild(shieldTitle);
 };
 renderTitles();
@@ -574,27 +614,26 @@ const renderInfo = () => {
     child.childNodes[2].style.height = '30%';
   });
   const calendarInfo = document.createElement('h2');
-  calendarInfo.textContent = `Lorem ipsum dolor sit amet
-  consectetur adipisicing elit. Possimus dolores
-  temporibus beatae?`;
-  calendarInfo.className = 'subtitle';
+  calendarInfo.textContent = `Choose the most convenient
+  timeframe that works for you.`;
+  calendarInfo.className = 'subtitle is-5';
   third.childNodes[0].childNodes[2].appendChild(calendarInfo);
   const moneyInfo = document.createElement('h2');
-  moneyInfo.textContent = `Lorem ipsum dolor sit amet
-  consectetur adipisicing elit. Possimus dolores
-  temporibus beatae?`;
-  moneyInfo.className = 'subtitle';
+  moneyInfo.textContent = `Earn interest on your money
+  in as little as a week!`;
+  moneyInfo.className = 'subtitle is-5';
   third.childNodes[1].childNodes[2].appendChild(moneyInfo);
   const shieldInfo = document.createElement('h2');
-  shieldInfo.textContent = `Lorem ipsum dolor sit amet
-  consectetur adipisicing elit. Possimus dolores
-  temporibus beatae?`;
-  shieldInfo.className = 'subtitle';
+  shieldInfo.textContent = `Don't worry, your account is
+  secured.`;
+  shieldInfo.className = 'subtitle is-5';
   third.childNodes[2].childNodes[2].appendChild(shieldInfo);
 };
 renderInfo();
-// Animations
-// const renderAnimations = () => {
 
-// };
-// renderAnimations();
+const test = () => {
+  if (window.location.href.includes('3000')) {
+    console.log('i see');
+  }
+};
+test();

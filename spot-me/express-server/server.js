@@ -1,4 +1,5 @@
 /* EXPRESS SERVER CONFIGURATION */
+
 require('dotenv').config();
 // Dependecies
 const express = require('express');
@@ -6,6 +7,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
 const emailRouter = require('./route/email');
+const calcRouter = require('./route/calculator');
 // Setting up PORT
 const PORT = process.env.PORT || 3000;
 // Initializing Express, Morgan, Body-parser, & Router
@@ -15,6 +17,7 @@ app.use(express.static(path.join(`${__dirname}/dist/public`)));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', emailRouter);
+app.use('/calculator', calcRouter);
 // Error Handlers for Route and Server
 // eslint-disable-next-line no-unused-vars
 app.use('*', (err, req, res, next) => {
