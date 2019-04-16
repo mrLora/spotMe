@@ -1,3 +1,5 @@
+/* POST REQUEST */
+
 const saveEmail = require('../services/api');
 
 /* DIVIDER */
