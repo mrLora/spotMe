@@ -32,20 +32,20 @@ const renderSection = () => {
   sloganOne.style.fontVariant = 'small-caps';
   sloganOne.style.color = '#417505';
   sloganOne.style.letterSpacing = '0.5vw';
-  sloganOne.classList.add('animated', 'fadeInLeft', 'slow', 'delay-1s');
+  sloganOne.classList.add('animated', 'fadeInLeft', 'slow');
   const sloganTwo = document.createElement('h1');
   sloganTwo.className = 'title is-1';
   sloganTwo.textContent = 'OR';
   sloganTwo.style.color = '#417505';
   sloganTwo.style.letterSpacing = '0.25vw';
-  sloganTwo.classList.add('animated', 'fadeInLeft', 'slow', 'delay-2s');
+  sloganTwo.classList.add('animated', 'fadeInLeft', 'slow', 'delay-1s');
   const sloganThree = document.createElement('h1');
   sloganThree.className = 'title is-1';
   sloganThree.textContent = 'Earn money by lending';
   sloganThree.style.fontVariant = 'small-caps';
   sloganThree.style.color = '#417505';
   sloganThree.style.letterSpacing = '0.5vw';
-  sloganThree.classList.add('animated', 'fadeInLeft', 'slow', 'delay-3s');
+  sloganThree.classList.add('animated', 'fadeInLeft', 'slow', 'delay-2s');
   container.appendChild(sloganOne);
   container.appendChild(sloganTwo);
   container.appendChild(sloganThree);
@@ -95,20 +95,6 @@ const renderFirstChildren = () => {
   firstArray[1].innerText = 'Coming Soon...';
 };
 renderFirstChildren();
-
-/* Functionality */
-
-// Allows events to be chained to one element
-EventTarget.prototype.addEventListener = (() => {
-  const { addEventListener } = EventTarget.prototype;
-  return function el() {
-    // this refers to the element
-    // this also loses its context inside an arrow funtcion
-    // eslint-disable-next-line prefer-rest-params
-    addEventListener.apply(this, arguments);
-    return this;
-  };
-})();
 
 /* SECOND CONTAINER */
 
@@ -296,7 +282,10 @@ const renderSecondChildren = () => {
   month.className = 'subtitle';
   const pay = document.createElement('h1');
   pay.className = 'subtitle';
-  const secondTwoArray = [howMuch, input, pay, weekOne, weekTwo, month];
+  const backButton = document.createElement('button');
+  backButton.className = 'button is-dark';
+  backButton.textContent = 'Back';
+  const secondTwoArray = [howMuch, input, pay, weekOne, weekTwo, month, backButton];
   secondTwoArray.forEach(el => secondArray[1].appendChild(el));
   secondTwoArray.forEach((el) => {
     const divs = el;
@@ -312,6 +301,8 @@ const renderSecondChildren = () => {
   // Number Input
   secondTwoArray[1].style.width = '25%';
   secondTwoArray[1].style.height = '5vh';
+  // Back Button
+  secondTwoArray[6].style.width = '5vw';
 };
 renderSecondChildren();
 
@@ -354,9 +345,7 @@ const switchSlide = () => {
   const lock = document.querySelector('#second').firstChild.childNodes[1].firstChild.firstChild;
   const firstSlide = document.querySelector('#second').firstChild;
   const secondSlide = document.querySelector('#second').lastChild;
-  const backButton = document.createElement('button');
-  backButton.className = 'button is-dark';
-  backButton.textContent = 'Back';
+  const backButton = document.querySelector('#second').lastChild.lastChild;
   const howMuchText = document.querySelector('#second').lastChild.firstChild.firstChild;
   const numInput = document.querySelector('#second').lastChild.childNodes[1].firstChild.firstChild.firstChild;
   const pay = document.querySelector('#second').lastChild.childNodes[2];
@@ -371,7 +360,6 @@ const switchSlide = () => {
       howMuchText.style.fontVariant = 'small-caps';
       howMuchText.style.paddingTop = '5vh';
       howMuchText.style.borderBottom = '0.3vh solid black';
-      secondSlide.appendChild(backButton);
       backButton.addEventListener('click', () => {
         numInput.value = '';
         pay.textContent = '';
@@ -630,10 +618,11 @@ const renderInfo = () => {
   third.childNodes[2].childNodes[2].appendChild(shieldInfo);
 };
 renderInfo();
-
-const test = () => {
-  if (window.location.href.includes('3000')) {
-    console.log('i see');
+// Unlocked feature for returning visitors
+const unlock = () => {
+  if (window.location.href.includes('/calculator')) {
+    const lock = document.querySelector('#second').firstChild.childNodes[1].firstChild.firstChild;
+    lock.classList.replace('fa-lock', 'fa-unlock');
   }
 };
-test();
+unlock();

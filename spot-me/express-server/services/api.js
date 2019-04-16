@@ -7,7 +7,7 @@ const saveEmail = async (email) => {
     const res = await axios.post('/', {
       email,
     });
-    return console.log(res);
+    return res;
   } catch (err) {
     throw (err);
   }

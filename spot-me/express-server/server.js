@@ -13,7 +13,8 @@ const PORT = process.env.PORT || 3000;
 // Initializing Express, Morgan, Body-parser, & Router
 const app = express();
 app.use(logger('dev'));
-app.use(express.static(path.join(`${__dirname}/dist/public`)));
+app.use('/', express.static(path.join(`${__dirname}/dist/public`)));
+app.use('/calculator', express.static(path.join(`${__dirname}/dist/public`)));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', emailRouter);

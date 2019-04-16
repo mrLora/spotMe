@@ -7,7 +7,6 @@ const handle404 = (err, req, res, next) => {
   console.log(err);
   res.sendStatus(404);
 };
-calcRouter.route('/').get((req, res) => res.send('nice'));
 calcRouter.use(handle404);
 
 module.exports = calcRouter;
