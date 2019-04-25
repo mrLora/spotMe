@@ -520,7 +520,7 @@ applyCalc();
 const renderThird = () => {
   const third = document.querySelector('#third');
   third.style.width = '100vw';
-  third.style.height = '40vh';
+  third.style.height = '30vh';
   third.style.display = 'flex';
   third.style.flexDirection = 'row';
   third.style.justifyContent = 'center';
@@ -620,6 +620,29 @@ const renderInfo = () => {
   third.childNodes[2].childNodes[2].appendChild(shieldInfo);
 };
 renderInfo();
+// Footer Text
+const renderFooter = () => {
+  const footer = document.querySelector('#footer');
+  const contact = document.createElement('h1');
+  const email = document.createElement('a');
+  const zelosLLC = document.createElement('h1');
+  footer.style.width = '100%';
+  footer.style.height = '5vh';
+  footer.style.display = 'flex';
+  footer.style.flexDirection = 'row';
+  footer.style.justifyContent = 'space-between';
+  contact.textContent = 'contact - ';
+  contact.className = 'title is-6';
+  email.href = 'mailto: info@zelosdigital.com'
+  email.textContent = 'info@zelosdigital.com'
+  email.style.color = '#7E0032';
+  zelosLLC.textContent = '© 2019 ZelosDigital LLC'
+  zelosLLC.className = 'title is-6';
+  contact.appendChild(email);
+  footer.appendChild(contact);
+  footer.appendChild(zelosLLC);
+}
+renderFooter();
 // Unlocked feature for returning visitors
 const unlock = () => {
   if (window.location.href.includes('/calculator')) {
@@ -628,7 +651,7 @@ const unlock = () => {
   }
 };
 unlock();
-
+// When users visit site on their Phone
 const isMobile = () => {
   const mobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone/i.test(navigator.userAgent);
   if (mobile === true) {
@@ -645,6 +668,7 @@ const isMobile = () => {
     const resultTwo = document.querySelector('#second').lastChild.childNodes[4];
     const resultThree = document.querySelector('#second').lastChild.childNodes[5];
     const button = document.querySelector('#second').lastChild.lastChild;
+    const footer = document.querySelector('#footer').childNodes;
     logo.style.width = '40vw';
     logo.style.height = '25vh';
     comingSoon.style.width = '50vw';
@@ -674,7 +698,9 @@ const isMobile = () => {
     resultTwo.style.width = '50%';
     resultThree.style.width = '50%';
     button.style.width = '15vw';
+    footer.forEach(el => {
+      el.classList.replace('is-6', 'is-7');
+    });
   }
 };
-
 isMobile();
