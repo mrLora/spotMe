@@ -628,3 +628,53 @@ const unlock = () => {
   }
 };
 unlock();
+
+const isMobile = () => {
+  const mobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+  if (mobile === true) {
+    const logo = document.querySelector('#first').firstChild;
+    const comingSoon = document.querySelector('#first').lastChild;
+    const slogan = document.querySelector('section').firstChild.firstChild.childNodes;
+    const thirdArray = document.querySelector('#third').childNodes;
+    const modal = document.querySelector('#second').firstChild.firstChild;
+    const modalText = document.querySelector('#second').firstChild.firstChild.firstChild.firstChild;
+    const howMuchText = document.querySelector('#second').lastChild.firstChild.firstChild;
+    const input = document.querySelector('#second').lastChild.childNodes[1];
+    const repaymentText = document.querySelector('#second').lastChild.childNodes[2];
+    const resultOne = document.querySelector('#second').lastChild.childNodes[3];
+    const resultTwo = document.querySelector('#second').lastChild.childNodes[4];
+    const resultThree = document.querySelector('#second').lastChild.childNodes[5];
+    const button = document.querySelector('#second').lastChild.lastChild;
+    logo.style.width = '40vw';
+    logo.style.height = '25vh';
+    comingSoon.style.width = '50vw';
+    comingSoon.style.fontSize = '16pt';
+    slogan.forEach(el => {
+      el.classList.replace('is-1', 'is-4');
+    });
+    thirdArray.forEach(el => {
+      const title = el.childNodes[1].firstChild;
+      const titleDiv = el.childNodes[1];
+      const text = el.childNodes[2].firstChild;
+      title.className = 'title is-5';
+      titleDiv.style.width = '100%';
+      titleDiv.style.marginBottom = '4vh';
+      titleDiv.style.marginTop = '2vh';
+      text.style.fontSize = '9pt';
+      text.className = 'subtitle is-6';
+    });
+    modal.style.backgroundColor = 'black';
+    // Get the numbers Text
+    modalText.classList.replace('is-1', 'is-5');
+    howMuchText.className = 'title is-7';
+    howMuchText.style.fontSize = '10.5pt';
+    input.style.width = '50%';
+    repaymentText.style.width = '80%';
+    resultOne.style.width = '50%';
+    resultTwo.style.width = '50%';
+    resultThree.style.width = '50%';
+    button.style.width = '15vw';
+  }
+};
+
+isMobile();
