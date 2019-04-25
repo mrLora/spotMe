@@ -631,12 +631,12 @@ const renderFooter = () => {
   footer.style.display = 'flex';
   footer.style.flexDirection = 'row';
   footer.style.justifyContent = 'space-between';
-  contact.textContent = 'contact - ';
+  contact.textContent = 'Contact - ';
   contact.className = 'title is-6';
   email.href = 'mailto: info@zelosdigital.com'
   email.textContent = 'info@zelosdigital.com'
   email.style.color = '#7E0032';
-  zelosLLC.textContent = '© 2019 ZelosDigital LLC'
+  zelosLLC.textContent = '© 2019 ZelosDigital LLC ';
   zelosLLC.className = 'title is-6';
   contact.appendChild(email);
   footer.appendChild(contact);
