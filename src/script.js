@@ -625,7 +625,7 @@ const renderFooter = () => {
   const footer = document.querySelector('#footer');
   const contact = document.createElement('h1');
   const email = document.createElement('a');
-  const zelosLLC = document.createElement('h1');
+  const spotLLC = document.createElement('h1');
   footer.style.width = '100%';
   footer.style.height = '5vh';
   footer.style.display = 'flex';
@@ -633,14 +633,14 @@ const renderFooter = () => {
   footer.style.justifyContent = 'space-between';
   contact.textContent = 'Contact - ';
   contact.className = 'title is-6';
-  email.href = 'mailto: info@zelosdigital.com'
-  email.textContent = 'info@zelosdigital.com'
+  email.href = 'mailto: info@spotme.cloud';
+  email.textContent = 'info@spotme.cloud';
   email.style.color = '#7E0032';
-  zelosLLC.textContent = '© 2019 ZelosDigital LLC ';
-  zelosLLC.className = 'title is-6';
+  spotLLC.textContent = '© 2019 SpotMe LLC ';
+  spotLLC.className = 'title is-6';
   contact.appendChild(email);
   footer.appendChild(contact);
-  footer.appendChild(zelosLLC);
+  footer.appendChild(spotLLC);
 }
 renderFooter();
 // Unlocked feature for returning visitors
@@ -681,13 +681,14 @@ const isMobile = () => {
       const titleDiv = el.childNodes[1];
       const text = el.childNodes[2].firstChild;
       title.className = 'title is-5';
+      title.style.fontSize = '14pt';
       titleDiv.style.width = '100%';
       titleDiv.style.marginBottom = '4vh';
       titleDiv.style.marginTop = '2vh';
       text.style.fontSize = '9pt';
       text.className = 'subtitle is-6';
     });
-    modal.style.backgroundColor = 'black';
+    modal.style.backgroundColor = 'rgb(54, 54, 54, 0.9)';
     // Get the numbers Text
     modalText.classList.replace('is-1', 'is-5');
     howMuchText.className = 'title is-7';

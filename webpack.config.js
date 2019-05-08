@@ -4,6 +4,7 @@ const wpConfig = {
   output: {
     filename: './public/js/build.js',
   },
+  watch: true
 };
 
 module.exports = wpConfig;
