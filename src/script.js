@@ -473,7 +473,8 @@ const applyCalc = () => {
   const weekOne = document.querySelector('#second').lastChild.childNodes[3];
   const weekTwo = document.querySelector('#second').lastChild.childNodes[4];
   const month = document.querySelector('#second').lastChild.childNodes[5];
-  input.addEventListener('onchange', (e) => {
+  input.addEventListener('input', (e) => {
+    window.alert('gottem');
     // eslint-disable-next-line default-case
     switch (filterStr('How much would you like to ', howMuch.innerText)) {
       case 'borrow?':
