@@ -654,6 +654,7 @@ unlock();
 // When users visit site on their Phone
 const isMobile = () => {
   const mobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+  const iPhone = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   if (mobile === true) {
     const logo = document.querySelector('#first').firstChild;
     const comingSoon = document.querySelector('#first').lastChild;
@@ -702,6 +703,9 @@ const isMobile = () => {
     footer.forEach(el => {
       el.classList.replace('is-6', 'is-7');
     });
+  }
+  if (iPhone === true) {
+    applyCalc();
   }
 };
 isMobile();
