@@ -695,7 +695,7 @@ const isMobile = () => {
     howMuchText.className = 'title is-7';
     howMuchText.style.fontSize = '10.5pt';
     input.style.width = '50%';
-    repaymentText.style.width = '80%';
+    repaymentText.style.width = '90%';
     resultOne.style.width = '50%';
     resultTwo.style.width = '50%';
     resultThree.style.width = '50%';
@@ -705,7 +705,50 @@ const isMobile = () => {
     });
   }
   if (iPhone === true) {
-    applyCalc();
+    const howMuch = document.querySelector('#second').lastChild.firstChild;
+    const input = document.querySelector('#second').lastChild.childNodes[1].firstChild.firstChild.firstChild;
+    const pay = document.querySelector('#second').lastChild.childNodes[2];
+    const weekOne = document.querySelector('#second').lastChild.childNodes[3];
+    const weekTwo = document.querySelector('#second').lastChild.childNodes[4];
+    const month = document.querySelector('#second').lastChild.childNodes[5];
+    input.addEventListener('onchange', (e) => {
+      // eslint-disable-next-line default-case
+      switch (filterStr('How much would you like to ', howMuch.innerText)) {
+        case 'borrow?':
+          if (e.value !== '') {
+            pay.textContent = 'Repayment timeframe options + interest:';
+            pay.style.paddingLeft = '3vw';
+            weekOne.textContent = `1 Week = ${filterNum(input.value * 1.01)}`;
+            weekOne.style.paddingLeft = '5vw';
+            weekTwo.textContent = `2 Weeks = ${filterNum(input.value * 1.025)}`;
+            weekTwo.style.paddingLeft = '5vw';
+            month.textContent = `1 Month = ${filterNum(input.value * 1.06)}`;
+            month.style.paddingLeft = '5vw';
+            pay.classList.add('animated', 'fadeInLeft', 'slower');
+            weekOne.classList.add('animated', 'fadeInLeft', 'slower', 'delay-1s');
+            weekTwo.classList.add('animated', 'fadeInLeft', 'slower', 'delay-2s');
+            month.classList.add('animated', 'fadeInLeft', 'slower', 'delay-3s');
+          }
+          break;
+        case 'lend?':
+          if (e.value !== '') {
+            pay.textContent = 'Your money back + interest:';
+            pay.style.paddingLeft = '7.5vw';
+            weekOne.textContent = `1 Week = ${filterNum(input.value * 1.007)}`;
+            weekOne.style.paddingLeft = '5vw';
+            weekTwo.textContent = `2 Weeks = ${filterNum(input.value * 1.018)}`;
+            weekTwo.style.paddingLeft = '5vw';
+            month.textContent = `1 Month = ${filterNum(input.value * 1.045)}`;
+            month.style.paddingLeft = '5vw';
+            pay.classList.add('animated', 'fadeInLeft', 'slower');
+            weekOne.classList.add('animated', 'fadeInLeft', 'slower', 'delay-1s');
+            weekTwo.classList.add('animated', 'fadeInLeft', 'slower', 'delay-2s');
+            month.classList.add('animated', 'fadeInLeft', 'slower', 'delay-3s');
+          }
+          break;
+        // No Default
+      }
+    });
   }
 };
 isMobile();
