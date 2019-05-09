@@ -474,7 +474,10 @@ const applyCalc = () => {
   const weekTwo = document.querySelector('#second').lastChild.childNodes[4];
   const month = document.querySelector('#second').lastChild.childNodes[5];
   input.addEventListener('input', (e) => {
-    window.alert('gottem');
+    const mobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+    if (mobile === true) {
+      alert('gotcha bitch');
+    }
     // eslint-disable-next-line default-case
     switch (filterStr('How much would you like to ', howMuch.innerText)) {
       case 'borrow?':
