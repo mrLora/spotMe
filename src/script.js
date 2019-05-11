@@ -266,7 +266,6 @@ const renderSecondChildren = () => {
   const numInput = document.createElement('input');
   numInput.className = 'input is-success';
   numInput.type = 'number';
-  numInput.pattern = '\d*';
   numInput.placeholder = 'Enter amount';
   const span = document.createElement('span');
   span.className = 'icon is-small is-left';
