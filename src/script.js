@@ -480,7 +480,7 @@ const applyCalc = () => {
   const month = document.querySelector('#month');
   input.addEventListener('input', (e) => {
     // eslint-disable-next-line default-case
-    switch (filterStr('How much would you like to ', howMuch.innerText)) {
+    switch (filterStr('How much would you like to ', howMuch.textContent)) {
       case 'borrow?':
         if (e.value !== '') {
           pay.textContent = 'Repayment timeframe options + interest:';
