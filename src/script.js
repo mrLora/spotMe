@@ -473,14 +473,13 @@ const filterNum = num => num.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))
 const applyCalc = () => {
   const howMuch = document.querySelector('#second').lastChild.firstChild;
   const input = document.querySelector('#num-input');
-  const pay = document.querySelector('#second').lastChild.childNodes[2];
+  const pay = document.querySelector('#pay');
   pay.style.width = '40%';
   const weekOne = document.querySelector('#week-one');
   const weekTwo = document.querySelector('#week-two');
   const month = document.querySelector('#month');
   input.addEventListener('input', (e) => {
     // eslint-disable-next-line default-case
-    window.alert('event fired');
     switch (filterStr('How much would you like to ', howMuch.innerText)) {
       case 'borrow?':
         if (e.value !== '') {
