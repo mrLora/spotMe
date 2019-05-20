@@ -492,9 +492,9 @@ const applyCalc = () => {
           month.textContent = `1 Month = ${filterNum(input.value * 1.06)}`;
           month.style.paddingLeft = '5vw';
           pay.classList.add('animated', 'fadeInLeft', 'slower');
-          weekOne.classList.add('animated', 'fadeInLeft', 'slower', 'delay-1s');
-          weekTwo.classList.add('animated', 'fadeInLeft', 'slower', 'delay-2s');
-          month.classList.add('animated', 'fadeInLeft', 'slower', 'delay-3s');
+          weekOne.classList.add('animated', 'fadeInLeft', 'slower', 'delay-2s');
+          weekTwo.classList.add('animated', 'fadeInLeft', 'slower', 'delay-3s');
+          month.classList.add('animated', 'fadeInLeft', 'slower', 'delay-4s');
         }
         break;
       case 'lend?':
@@ -508,9 +508,9 @@ const applyCalc = () => {
           month.textContent = `1 Month = ${filterNum(input.value * 1.045)}`;
           month.style.paddingLeft = '5vw';
           pay.classList.add('animated', 'fadeInLeft', 'slower');
-          weekOne.classList.add('animated', 'fadeInLeft', 'slower', 'delay-1s');
-          weekTwo.classList.add('animated', 'fadeInLeft', 'slower', 'delay-2s');
-          month.classList.add('animated', 'fadeInLeft', 'slower', 'delay-3s');
+          weekOne.classList.add('animated', 'fadeInLeft', 'slower', 'delay-2s');
+          weekTwo.classList.add('animated', 'fadeInLeft', 'slower', 'delay-3s');
+          month.classList.add('animated', 'fadeInLeft', 'slower', 'delay-4s');
         }
         break;
       // No Default
@@ -699,7 +699,8 @@ const isMobile = () => {
     howMuchText.className = 'title is-7';
     howMuchText.style.fontSize = '10.5pt';
     input.style.width = '50%';
-    repaymentText.style.width = '80%';
+    repaymentText.style.width = '90%';
+    repaymentText.style.fontSize = '12pt';
     resultOne.style.width = '50%';
     resultTwo.style.width = '50%';
     resultThree.style.width = '50%';
