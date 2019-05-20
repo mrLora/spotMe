@@ -265,6 +265,7 @@ const renderSecondChildren = () => {
   control.className = 'control has-icons-left';
   const numInput = document.createElement('input');
   numInput.className = 'input is-success';
+  numInput.id = 'num-input';
   numInput.type = 'number';
   numInput.placeholder = 'Enter amount';
   const span = document.createElement('span');
@@ -278,12 +279,16 @@ const renderSecondChildren = () => {
   input.appendChild(field);
   const weekOne = document.createElement('h2');
   weekOne.className = 'subtitle';
+  weekOne.id = 'week-one';
   const weekTwo = document.createElement('h2');
   weekTwo.className = 'subtitle';
+  weekTwo.id = 'week-two';
   const month = document.createElement('h2');
   month.className = 'subtitle';
+  month.id = 'month';
   const pay = document.createElement('h1');
   pay.className = 'subtitle';
+  pay.id = 'pay';
   const backButton = document.createElement('button');
   backButton.className = 'button is-dark';
   backButton.textContent = 'Back';
@@ -349,11 +354,11 @@ const switchSlide = () => {
   const secondSlide = document.querySelector('#second').lastChild;
   const backButton = document.querySelector('#second').lastChild.lastChild;
   const howMuchText = document.querySelector('#second').lastChild.firstChild.firstChild;
-  const numInput = document.querySelector('#second').lastChild.childNodes[1].firstChild.firstChild.firstChild;
-  const pay = document.querySelector('#second').lastChild.childNodes[2];
-  const weekOne = document.querySelector('#second').lastChild.childNodes[3];
-  const weekTwo = document.querySelector('#second').lastChild.childNodes[4];
-  const month = document.querySelector('#second').lastChild.childNodes[5];
+  const numInput = document.querySelector('#num-input');
+  const pay = document.querySelector('#pay');
+  const weekOne = document.querySelector('#week-one');
+  const weekTwo = document.querySelector('#week-two');
+  const month = document.querySelector('#month');
   lock.addEventListener('animationend', setTimeout(() => {
     if (check() !== true) {
       firstSlide.style.display = 'none';
@@ -467,14 +472,15 @@ const filterNum = num => num.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))
 // Apply necessary calculations based on which path was chosen
 const applyCalc = () => {
   const howMuch = document.querySelector('#second').lastChild.firstChild;
-  const input = document.querySelector('#second').lastChild.childNodes[1].firstChild.firstChild.firstChild;
+  const input = document.querySelector('#num-input');
   const pay = document.querySelector('#second').lastChild.childNodes[2];
   pay.style.width = '40%';
-  const weekOne = document.querySelector('#second').lastChild.childNodes[3];
-  const weekTwo = document.querySelector('#second').lastChild.childNodes[4];
-  const month = document.querySelector('#second').lastChild.childNodes[5];
+  const weekOne = document.querySelector('#week-one');
+  const weekTwo = document.querySelector('#week-two');
+  const month = document.querySelector('#month');
   input.addEventListener('input', (e) => {
     // eslint-disable-next-line default-case
+    window.alert('event fired');
     switch (filterStr('How much would you like to ', howMuch.innerText)) {
       case 'borrow?':
         if (e.value !== '') {
