@@ -700,10 +700,14 @@ const isMobile = () => {
     howMuchText.style.fontSize = '10.5pt';
     input.style.width = '50%';
     repaymentText.style.width = '90%';
-    repaymentText.style.fontSize = '12pt';
+    repaymentText.style.fontSize = '13pt';
+    repaymentText.style.textAlign = 'center';
     resultOne.style.width = '50%';
+    resultOne.style.textAlign = 'center';
     resultTwo.style.width = '50%';
+    resultTwo.style.textAlign = 'center';
     resultThree.style.width = '50%';
+    resultThree.style.textAlign = 'center';
     button.style.width = '15vw';
     footer.forEach(el => {
       el.classList.replace('is-6', 'is-7');
