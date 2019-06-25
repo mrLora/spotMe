@@ -9,8 +9,8 @@ const saveEmail = async (email) => {
     });
     return res;
   } catch (err) {
-    throw (err);
+    throw new Error('Something went wrong with your post request');
   }
 };
 
-module.exports = saveEmail;
+export { saveEmail }

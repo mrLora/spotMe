@@ -22,7 +22,7 @@ const saveToMailChimp = async (email) => {
     const res = await axios.post(url, body, { headers });
     return res;
   } catch (err) {
-    throw (err);
+    throw new Error('Oops! Something went wrong with saving to Mailchimp.');
   }
 };
 
