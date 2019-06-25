@@ -14,7 +14,7 @@ const save = () => {
     
     if (validateEmail(input.value) === true && e.keyCode === 13) {
       // send email to backend
-      console.log(input.value);
+      console.log(`I am the first log: ${input.value}`);
       saveEmail(input.value);
 
       modal.style.display = 'none';

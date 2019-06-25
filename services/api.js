@@ -3,7 +3,7 @@
 const axios = require('axios');
 
 const saveEmail = async (email) => {
-  console.log(email);
+  console.log(`I am the second log: ${email}`);
   try {
     const res = await axios.post('/', {
       email,
